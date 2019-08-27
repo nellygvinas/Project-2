@@ -9,13 +9,22 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
+const session      = require("express-session");
+const MongoStore= require("connect-mongo")(session);
+const passport     = require("passport");
+const LocalStrategy= require("passport-local").Strategy;
 
+const User         = require('./models/User');
+const bcrypt       = require('bcryptjs');
+const flash        = require("connect-flash");
+
+
+mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/keepsake', {useNewUrlParser: true})
-  .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
-  })
-  .catch(err => {
+  .connect('mongodb://localhost/keepsake-db', {useNewUrlParser: true})
+  .then(() => {
+    console.log('Connected to Mongo!')
+  }).catch(err => {
     console.error('Error connecting to mongo', err)
   });
 
@@ -45,14 +54,75 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
-
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Keepsake App';
+
+// version without passport
+// app.use(session({
+//   secret: "shhhhhsupersecret",
+//   cookie: { maxAge: 60000 },
+//   store: new MongoStore({
+//     mongooseConnection: mongoose.connection,
+//     ttl: 24 * 60 * 60 // 1 day
+//   })
+// }));
 
 
+// version with passport - you can save a secret variable with the session 
+app.use(session({
+  secret: "anysecretword",
+  resave: true,
+  saveUninitialized: true
+}));
 
-const index = require('./routes/index');
-app.use('/', index);
+passport.serializeUser((user, cb) => {
+  cb(null, user._id);
+});
+
+passport.deserializeUser((id, cb) => {
+  User.findById(id, (err, user) => {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+
+app.use(flash());
+
+passport.use(new LocalStrategy((username, password, next) => {
+  User.findOne({ username }, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return next(null, false, { message: "Incorrect username" });
+    }
+    if (!bcrypt.compareSync(password, user.password)) {
+      return next(null, false, { message: "Incorrect password" });
+    }
+
+    return next(null, user);
+  });
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  res.locals.errorMessage = req.flash('error');
+  res.locals.successMessage=req.flash('success');
+  next();
+});
+
+// ROUTES 
+
+const userRoutes = require('./routes/user-routes');
+app.use(userRoutes)
+
+const feedRoutes = require('./routes/feed-routes');
+app.use('/feed', feedRoutes);
 
 
 module.exports = app;
