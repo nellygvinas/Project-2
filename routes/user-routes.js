@@ -30,9 +30,11 @@ router.post('/signup', (req, res, next)=>{
     .then(()=>{
       req.flash('Success', 'Your account has been created.')
         res.redirect('/')
+        console.log("user created")
     })
     .catch((err)=>{
         next(err)
+        console.log("no user created")
     })
 })
 
