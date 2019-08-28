@@ -6,7 +6,7 @@ const Child = require('../models/Child');
 router.get('/', (req, res, next)=>{
   if(!req.user){
     req.flash('Error', 'Please login to view.')
-    res.redirect('/')
+    //res.redirect('/')
   }
   console.log('------------------------')
   console.log(req.user)

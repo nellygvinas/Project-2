@@ -16,6 +16,7 @@ router.post('/signup', (req, res, next)=>{
 
     let username = req.body.theUsername;
     let pword = req.body.thePassword;
+    let email = req.body.theEmail;
 
   if(!username || !pword){
     req.flash('Error', 'Please provide both username and password.')
@@ -25,7 +26,7 @@ router.post('/signup', (req, res, next)=>{
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(pword, salt);
 
-    User.create({username: username, password: hashedPassword})
+    User.create({username: username, password: hashedPassword, email: email})
     .then(()=>{
       req.flash('Success', 'Your account has been created.')
         res.redirect('/')
@@ -35,7 +36,7 @@ router.post('/signup', (req, res, next)=>{
     })
 })
 
-
+// Login form will be a post request on the index - homepage
 router.post('/login', passport.authenticate("local", {
   successRedirect: "/feed",
   failureRedirect: "/",
