@@ -90,7 +90,19 @@ router.post('/:id/remove', (req, res, next)=>{
 })
 
 
+// GET CHILD DETAILS
 
+router.get('/details/:idVariable', (req, res, next)=>{
+  const theID = req.params.idVariable;
+  
+  Child.findById(theID)
+  .then((result)=>{
+    res.render('child-details', {theSingleChild: result})
+  })
+  .catch((err)=>{
+    next(err)
+  })
+  })
 
 
 

@@ -1,0 +1,48 @@
+<a href="/feed">Back to Feed</a>
+
+<h1 id="child-name">
+{{theSingleChild.name}}
+</h1>
+
+
+<h4 id="child-dob">
+{{theSingleChild.dob}}
+</h4>
+
+
+<img src="{{theSingleChild.image}}" alt="">
+
+
+
+<div>
+
+
+<h2>Edit {{theSingleChild.name}}</h2>
+
+<form id="edit-form">
+
+    <input type="hidden" value="{{theSingleChild._id}}" id="hidden-id">
+
+    <div>
+        <label>Name</label>
+        <input type="text" id="edit-name" value="{{theSingleChild.name}}">
+    </div>
+
+        <div>
+        <label>Date of Birth</label>
+        <input type="date" id="edit-dob"  value="{{theSingleChild.dob}}">
+        </div>
+
+        <div>
+        <label>Image</label>
+        <input type="file" id="edit-image"  value="{{theSingleChild.image}}">
+        </div>
+
+    <button>Save</button>
+</form>
+
+
+
+</div>
+
+<script src="/javascripts/child-edit.js"></script>
