@@ -1,5 +1,41 @@
 <h1>Home Feed</h1>
 
-<p> Amazing!!! NO, NOT AMAZING!</p>
+<p> Amazing!!! </p>
 
-Wait, I didn't want that deleted, I wanted to save it in case we needed it someday.
+<h2>Children</h2>
+<a href="/feed/new-child">Add New Child</a>
+
+{{#each listOfChildren}}
+
+
+<div class="card">
+
+
+<a href="/feed/details/{{this._id}}">
+
+<h3>
+{{this.name}}
+</h3>
+
+</a>
+
+
+{{#if this.owned}}
+
+<a href="/feed/edit/{{this._id}}">Edit This Child</a>
+<form style="width: 33%" action="/feed/{{this._id}}/remove" method="POST">
+    <button>Delete Child</button>
+</form>
+
+{{else}}
+
+
+{{/if}}
+
+
+
+</div>
+{{/each}}
+
+
+</div>
