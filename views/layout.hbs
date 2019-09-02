@@ -9,6 +9,34 @@
 </head>
 <body>
 
+{{#if currentUser}}
+<a href="/feed">Go to Feed</a>
+ {{else}}
+<a href="/">Back to Home</a>
+{{/if}}
+
+ {{#if errorMessage}}
+    <div style="border: 1px solid red">
+        {{errorMessage}}
+    </div>
+    {{/if}}
+    {{#if successMessage}}
+      <div style="border: 1px solid green">
+      {{successMessage}}
+      </div>
+    {{/if}}
+
+
+{{#if currentUser}}
+
+    <h3>Hello, {{currentUser.username}}</h3>
+
+    <form action="/logout" method="POST">
+        <button>Logout</button>
+    </form>
+{{/if}}
+
+
   {{{body}}}
 
   <script src="/javascripts/script.js"></script>

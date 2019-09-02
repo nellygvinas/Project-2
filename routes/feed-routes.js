@@ -18,7 +18,7 @@ router.get('/', (req, res, next)=>{
   
   Child.find()
   .then((result)=>{
-    // console.log(result)
+    console.log(result)
 
     let newList = result.map((eachChild)=>{
       if(eachChild.creator.equals(req.user._id)){
@@ -105,7 +105,27 @@ router.get('/details/:idVariable', (req, res, next)=>{
   })
 
 
+// REMOVE CHILD
 
+router.post('/:id/remove-child', (req, res, next)=>{
+  const id = req.params.id;
+  console.log(id)
+
+  Child.findByIdAndRemove(id)
+  .then(()=>{
+    res.redirect('/feed')
+  })
+  .catch((err)=>{
+    next(err);
+  })
+})
+
+// LOGOUT
+
+router.post('/logout', (req, res, next)=>{
+  req.logout();
+  res.redirect('/')
+})
 
 
 

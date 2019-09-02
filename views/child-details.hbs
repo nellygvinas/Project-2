@@ -6,7 +6,7 @@
 
 
 <h4 id="child-dob">
-{{theSingleChild.dob}}
+Date of Birth {{theSingleChild.dob}}
 </h4>
 
 
@@ -41,7 +41,12 @@
     <button>Save</button>
 </form>
 
+</div>
 
+<div>
+  <form action="/feed/{{theSingleChild._id}}/remove-child" method="POST">
+    <button>Remove Child</button>
+  </form>
 
 </div>
 

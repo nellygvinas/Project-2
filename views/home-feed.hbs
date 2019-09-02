@@ -3,37 +3,77 @@
 <p> Amazing!!! </p>
 
 <h2>Children</h2>
-<a href="/feed/new-child">Add New Child</a>
 
 {{#each listOfChildren}}
 
+  {{#if this.owned}}
 
-<div class="card">
+  <div class="card">
+    <a href="/feed/{{this._id}}">
+    <h3>{{this.name}}
+    </h3>
 
+    <a href="/feed/details/{{this._id}}">
+      <p>Edit details for {{this.name}}
+      </p>
+    </a>
+  </div>
 
-<a href="/feed/details/{{this._id}}">
-
-<h3>
-{{this.name}}
-</h3>
-
-</a>
-
-
-{{#if this.owned}}
-
-<a href="/feed/edit/{{this._id}}">View Child Details</a>
-
-
-{{else}}
-
-
-{{/if}}
-
-
-
-</div>
+  {{else}}
+  {{/if}}
+  
 {{/each}}
 
 
+
+<a href="/feed/new-child">Add New Child</a>
+
+
+<div>
+
+{{!-- CREATE POST --}}
+<h2>Create Post</h2>
+
+<form action="" id="create-post">
+
+    <div>
+        <label>Select Child</label>
+        <select name="children" id="postChild" multiple>
+          {{#each listOfChildren}}
+            {{#if this.owned}}
+            <option value="{{this.name}}">{{this.name}}</option>
+            {{/if}}
+          {{/each}}
+        </select>
+    </div>
+
+    <div>
+      <label>Title</label>
+        <input type="text" id="postTitle">
+    </div>
+
+    <div>
+      <label>Date Created</label>
+      <input type="date" id="postDate">
+    </div>
+
+    <div>
+      <label>Description</label>
+      <input type="text" id="postDescription">
+    </div>
+
+    <div>
+      <label>Add Image</label>
+      <input type="file" id="postImage">
+    </div>
+
+    <input type="submit">
+
+</form>
+
+
+
 </div>
+
+
+<script src="/javascripts/new-post.js"></script>
