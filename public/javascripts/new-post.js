@@ -16,32 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
        let title = document.getElementById('postTitle').value;
        let date = document.getElementById('postDate').value;
        let description = document.getElementById('postDescription').value;
-       let file = document.getElementById('postImage').value;
+       let image = document.getElementById('postImage').value;
 
 // make axios request and send the correct stuff in req.body
      axios.post('/api/feed/new-post', {
          postTitle: title,
          postDate: date,
          postDescription: description,
-         postImage: file,
+         postImage: image,
          postChildId: childIdValue
      })
-     .then((res)=>{
+     .then((response)=>{
 
-       console.log(res)
+      //  console.log(res)
 
-       // make another axios request to get new updated info of the celebrity
-       axios.get('/api/feed/posts')
-       .then((theResponse)=>{
-
-
+      //  Possibly make another axios request to get new updated info ??
+      //  axios.get('/api/feed/posts')
+      //  .then((theResponse)=>{
            // take the new updated info and put it on the page
-          let newPost = theResponse.data;
+          let newPost = response.data;
 
            document.getElementById('post-title').innerText = newPost.title
            document.getElementById('post-date').innerText = newPost.creation
            document.getElementById('post-description').innerText = newPost.description
-           document.getElementById('post-image').innerHTML = newPost.postImage
+           document.getElementById('post-image').innerHTML = newPost.image
            document.getElementById('post-child').innerText = newPost.child
 
 
