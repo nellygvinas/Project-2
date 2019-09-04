@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-
+const Posting = require('../models/Posting');
 const Child = require('../models/Child');
 
 const fileUploadMiddleWare = require('../config/cloudinary-file');
@@ -17,23 +17,41 @@ router.get('/', (req, res, next)=>{
   console.log(req.user)
   
   Child.find()
-  .then((result)=>{
-    console.log(result)
+  .then((children)=>{
 
-    let newList = result.map((eachChild)=>{
-      if(eachChild.creator.equals(req.user._id)){
+    Posting.find()
+    .then((posts) => {
+
+    console.log(children)
+    console.log(posts)
+
+     let childList = children.map((eachChild)=>{
+        if(eachChild.creator.equals(req.user._id)){
         eachChild.owned = true;
         return eachChild
-      } else{
-        console.log("no children found")
-      }
-    })
-    res.render('home-feed', {listOfChildren: newList});
+        } else{
+        console.log("No children found for this user.")
+        }
+      })
+  
+     let postList = posts.map((eachPost)=>{
+        if(eachPost.creator.equals(req.user._id)){
+          eachPost.owned = true;
+          return eachPost
+        } else {
+          console.log("No postings found for this user.")
+        }
+      })
+    
+    res.render('home-feed', {listOfChildren: childList, listOfPosts: posts});
   })
   .catch((err)=>{
-    next(err);
-
-})
+    next(err)
+  })
+ })
+  .catch((err)=>{
+  next(err)
+  })
 
 }) // end of get request for home feed.
 
@@ -120,12 +138,18 @@ router.post('/:id/remove-child', (req, res, next)=>{
   })
 })
 
+// NEW POST
+router.post('')
+
+
+
 // LOGOUT
 
 router.post('/logout', (req, res, next)=>{
   req.logout();
   res.redirect('/')
 })
+
 
 
 

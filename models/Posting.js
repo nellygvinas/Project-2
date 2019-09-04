@@ -6,9 +6,9 @@ const postingSchema = new Schema({
     title: String,
     creation: Date,
     description: String,
-    creator: {type: Schema.Types.ObjectId, ref: 'User'}, 
-    child: [{type: Schema.Types.ObjectId, ref: 'Child'}], 
-    image: String
+    image: String,
+    child: [{type: Schema.Types.ObjectId, ref: 'Child'}],
+    creator: {type: Schema.Types.ObjectId, ref: 'User'}
 })
 
 const postingModel = mongoose.model('Posting', postingSchema)
