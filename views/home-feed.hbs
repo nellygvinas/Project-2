@@ -75,37 +75,39 @@
 
 
 
-<div class="post-container">
+<div class="post-section">
 
   <h1>Posts</h1>
 
-  {{#each listOfPosts}}
-  
-  <div class="post-card">
-   
-    <h2 id="post-title">
-    {{this.title}}
-    </h2>
+  <div class="post-container">
 
-
-    <h4 id="post-date">
-    {{this.creation}}
-    </h4>
-
-
-    <p id="post-description">
-    {{this.description}}
-    </p>
-
-    <img id="post-image" src="{{this.image}}">
-
-    <p id="post-child">
-    {{this.child}}
-    </p>
+    {{#each listOfPosts}}
     
-  </div>
-  {{/each}}
+    <div class="post-card">
+    
+      <h2 id="post-title">
+      {{this.title}}
+      </h2>
 
+
+      <h4 id="post-date">
+      {{this.creation}}
+      </h4>
+
+
+      <p id="post-description">
+      {{this.description}}
+      </p>
+
+      <img id="post-image" src="{{this.image}}">
+
+      <p id="post-child">
+      {{this.child}}
+      </p>
+      
+    </div>
+    {{/each}}
+ </div>
 </div>
 
 
