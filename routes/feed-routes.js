@@ -14,8 +14,9 @@ router.get('/', (req, res, next)=>{
     req.flash('Error', 'Please login to view.')
     //res.redirect('/')
   }
-  console.log('------------------------')
+  console.log('SESSION------------------------')
   console.log(req.user)
+  console.log('-------------------------------')
   
   Child.find()
   .then((children)=>{
@@ -63,6 +64,8 @@ router.get('/user-details', (req, res, next)=>{
   
   User.findById(userId)
   .then((userInfo)=>{
+    let userArr = userInfo.data
+    console.log(userArr);
     res.render('user-details', {theUser: userInfo})
   })
   .catch((err)=>{
@@ -167,6 +170,51 @@ router.post('/:id/remove-child', (req, res, next)=>{
 // NEW POST
 //router.post('')
 
+
+// CHILD FEED
+
+router.get('/feed/:id', (req, res, next)=>{
+  
+ // const childId = 
+  
+  Child.find()
+  .then((children)=>{
+
+    Posting.find()
+    .then((posts) => {
+
+    console.log(children)
+    console.log(posts)
+
+     let childList = children.map((eachChild)=>{
+        if(eachChild.creator.equals(req.user._id)){
+        eachChild.owned = true;
+        return eachChild
+        } else{
+        console.log("No children found for this user.")
+        }
+      })
+  
+     let postList = posts.map((eachPost)=>{
+        if(eachPost.creator.equals(req.user._id)){
+          eachPost.owned = true;
+          return eachPost
+        } else {
+          console.log("No postings found for this user.")
+        }
+      })
+    
+    res.render('home-feed', {listOfChildren: childList, listOfPosts: postList});
+  })
+  .catch((err)=>{
+    next(err)
+  })
+ })
+  .catch((err)=>{
+  next(err)
+  })
+
+})
 
 
 
