@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
      })
      .then((response)=>{
 
+    
       //  console.log(res)
 
       //  Possibly make another axios request to get new updated info ??
@@ -48,20 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
            console.log(err);
        })
 
-
-
-
-     })
-
-
-   }
-
- }
-
-
-
-
-
-
+     }
  
- }, false);
+ } false
+ );

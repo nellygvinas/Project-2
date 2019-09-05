@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const Posting = require('../models/Posting');
 const Child = require('../models/Child');
+const User = require('../models/User');
 
 const fileUploadMiddleWare = require('../config/cloudinary-file');
 
@@ -43,7 +44,7 @@ router.get('/', (req, res, next)=>{
         }
       })
     
-    res.render('home-feed', {listOfChildren: childList, listOfPosts: posts});
+    res.render('home-feed', {listOfChildren: childList, listOfPosts: postList});
   })
   .catch((err)=>{
     next(err)
@@ -79,12 +80,20 @@ router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, re
       image: image,
       creator: req.user._id
     })
-    .then((result)=>{
+    .then((childCreated)=>{
 
-      req.flash('success','New Child successfully added')
+      console.log(childCreated)
+      User.findByIdAndUpdate(req.user._id, {$push: {children: childCreated}}, {new: true})
+      .then(()=> {
 
-      res.redirect('/feed')
-      //res redirect take a url as the argument
+        req.flash('success','New Child successfully added')
+  
+        res.redirect('/feed')
+        //res redirect take a url as the argument
+      })
+      .catch((err) => {
+        next(err)
+      })
 
     })
     .catch((err)=>{
