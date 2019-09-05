@@ -73,10 +73,20 @@ router.post('/login', passport.authenticate("local", {
 
 // })
 
-router.post('/logout', (req, res, next)=>{
+// LOGOUT
+
+router.get('feed/logout', (req, res, next)=>{
   req.logout();
   res.redirect('/')
 })
+
+// USER DETAILS PAGE
+
+router.get('feed/user-details', (req, res, next)=>{
+  res.render()
+  res.redirect('/')
+})
+
 
 // Viewing a secret page
 // router.get('/secret' ,(req, res, next)=>{

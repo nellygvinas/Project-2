@@ -56,6 +56,23 @@ router.get('/', (req, res, next)=>{
 
 }) // end of get request for home feed.
 
+// USER DETAILS PAGE
+
+router.get('/user-details', (req, res, next)=>{
+  const userId = req.user._id;
+  
+  User.findById(userId)
+  .then((userInfo)=>{
+    res.render('user-details', {theUser: userInfo})
+  })
+  .catch((err)=>{
+    next(err)
+  })
+  })
+
+
+//req.user._id
+
 
 // CREATE CHILD  =================================
 
@@ -148,16 +165,7 @@ router.post('/:id/remove-child', (req, res, next)=>{
 })
 
 // NEW POST
-router.post('')
-
-
-
-// LOGOUT
-
-router.post('/logout', (req, res, next)=>{
-  req.logout();
-  res.redirect('/')
-})
+//router.post('')
 
 
 
