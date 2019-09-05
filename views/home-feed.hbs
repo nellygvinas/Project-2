@@ -1,112 +1,186 @@
-<h1>Home Feed</h1>
+{{!-- NAV --}}
+<!-- Dropdown -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#!">Edit Profile</a></li>
+  <li>
+    {{#if currentUser}}
+    <form action="/logout" method="POST">
+      <button>Logout</button>
+    </form>
+    {{/if}}
+  </li>
+</ul>
 
-<p> Amazing!!! </p>
+<nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">
+      <img src="/images/logo.png" alt="keepsake logo" class="logo">
+      Keepsake</a>
 
-<h2>Children</h2>
+    <ul class="right hide-on-med-and-down">
+      <li class="welcome">
+        {{#if currentUser}}
+        Welcome back, {{currentUser.username}}
+        {{/if}}
+      </li>
 
-{{#each listOfChildren}}
+      <li>
+        <a href="#"><i class="material-icons left">search</i>Search</a>
+      </li>
+
+      <li>
+        <a href="#"><i class="material-icons left">add</i>Add Artwork</a>
+      </li>
+
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+{{!-- SIDE NAV --}}
+{{!-- <ul id="slide-out" class="side-nav fixed">
+  <li><a href="#!">First Sidebar Link</a></li>
+  <li><a href="#!">Second Sidebar Link</a></li>
+</ul>
+<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a> --}}
+
+
+{{!-- CONTAINER --}}
+<div class="container">
+  <h2>Children</h2>
+
+  <div class="row">
+
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="images/headshot-girl.jpg">
+          <span class="card-title">Child Name</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-image">
+          <img src="images/add-child.jpg">
+          <span class="card-title">Add New Child</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- end child row -->
+
+  {{#each listOfChildren}}
 
   {{#if this.owned}}
 
   <div class="card">
     <a href="/feed/{{this._id}}">
-    <h3>{{this.name}}
-    </h3>
+      <h3>{{this.name}}
+      </h3>
 
-    <a href="/feed/details/{{this._id}}">
-      <p>Edit details for {{this.name}}
-      </p>
-    </a>
+      <a href="/feed/details/{{this._id}}">
+        <p>Edit details for {{this.name}}
+        </p>
+      </a>
   </div>
 
   {{else}}
   {{/if}}
-  
-{{/each}}
+
+  {{/each}}
 
 
 
-<a href="/feed/new-child">Add New Child</a>
+  <a href="/feed/new-child">Add New Child</a>
 
 
-<div>
+  <div>
 
-{{!-- CREATE POST --}}
-<h2>Create Post</h2>
+    {{!-- CREATE POST --}}
+    <h2>Create Post</h2>
 
-<form action="" id="create-post">
+    <form action="" id="create-post">
 
-    <div>
+      <div>
         <label>Select Child</label>
         <select name="children" id="postChildId" multiple>
           {{#each listOfChildren}}
-            {{#if this.owned}}
-            <option value="{{this._id}}">{{this.name}}</option>
-            {{/if}}
+          {{#if this.owned}}
+          <option value="{{this._id}}">{{this.name}}</option>
+          {{/if}}
           {{/each}}
         </select>
-    </div>
+      </div>
 
-    <div>
-      <label>Title</label>
+      <div>
+        <label>Title</label>
         <input type="text" id="postTitle">
-    </div>
+      </div>
 
-    <div>
-      <label>Date Created</label>
-      <input type="date" id="postDate">
-    </div>
+      <div>
+        <label>Date Created</label>
+        <input type="date" id="postDate">
+      </div>
 
-    <div>
-      <label>Description</label>
-      <input type="text" id="postDescription">
-    </div>
+      <div>
+        <label>Description</label>
+        <input type="text" id="postDescription">
+      </div>
 
-    <div>
-      <label>Add Image</label>
-      <input type="file" id="postImage">
-    </div>
+      <div>
+        <label>Add Image</label>
+        <input type="file" id="postImage">
+      </div>
 
-    <input type="submit">
+      <input type="submit">
 
-</form>
+    </form>
 
-</div>
-
-
-
-<div class="post-container">
-
-  <h1>Posts</h1>
-
-  {{#each listOfPosts}}
-  
-  <div class="post-card">
-   
-    <h2 id="post-title">
-    {{this.title}}
-    </h2>
-
-
-    <h4 id="post-date">
-    {{this.creation}}
-    </h4>
-
-
-    <p id="post-description">
-    {{this.description}}
-    </p>
-
-    <img id="post-image" src="{{this.image}}">
-
-    <p id="post-child">
-    {{this.child}}
-    </p>
-    
   </div>
-  {{/each}}
+
+
+
+  <div class="post-container">
+
+    <h1>Posts</h1>
+
+    {{#each listOfPosts}}
+
+    <div class="post-card">
+
+      <h2 id="post-title">
+        {{this.title}}
+      </h2>
+
+
+      <h4 id="post-date">
+        {{this.creation}}
+      </h4>
+
+
+      <p id="post-description">
+        {{this.description}}
+      </p>
+
+      <img id="post-image" src="{{this.image}}">
+
+      <p id="post-child">
+        {{this.child}}
+      </p>
+
+    </div>
+    {{/each}}
+
+  </div>
+
 
 </div>
+
 
 
 <script src="/javascripts/new-post.js"></script>
