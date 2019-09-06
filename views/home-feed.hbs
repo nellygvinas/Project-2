@@ -37,15 +37,34 @@
   </div>
 </nav>
 
-{{!-- SIDE NAV --}}
-{{!-- <ul id="slide-out" class="side-nav fixed">
-  <li><a href="#!">First Sidebar Link</a></li>
-  <li><a href="#!">Second Sidebar Link</a></li>
-</ul>
-<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a> --}}
+<!-- SIDE NAV -->
+<div class="sidenav">
+  <ul class="toggle-avatars">
+    <li>
+      <a href="#child-1">
+        <img class="circle avatar" src="images/headshot-girl-square.jpg">
+      </a>
+    </li>
+    <li>
+      <a href="#child-21">
+        <img class="circle avatar" src="images/headshot-girl-square.jpg">
+      </a>
+    <li>
+    <li>
+      <a href="#child-3">
+        <img class="circle avatar" src="images/headshot-girl-square.jpg">
+      </a>
+    <li>
+    <li>
+      <div class="sidebar-add-child-button">
+        <a class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
+      </div>
+    </li>
+  </ul>
+</div>
 
 
-{{!-- CONTAINER --}}
+<!-- CONTAINER -->
 <div class="container">
   <h2>Children</h2>
 
@@ -71,7 +90,7 @@
           <img src="images/add-child.jpg">
           <span class="card-title">Add New Child</span>
           {{!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="/feed/new-child"><i class="material-icons">add</i></a> --}}
-          <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
+          <a class="btn-floating halfway-fab waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
         </div>
       </div>
     </div>
@@ -113,10 +132,7 @@
                   <i class="material-icons right">send</i>
                 </button>
               </div>
-
-
             </div>
-
           </form>
         </div>
       </div>
@@ -130,7 +146,7 @@
 
     <!-- MOVE THIS TO THE CHILD FEED VIEW -->
     <!-- should we call this "add artwork" instead? -->
-    <h2>Create Post</h2>
+    {{!-- <h2>Create Post</h2>
     <form action="" id="create-post">
       <div>
         <label>Select Child</label>
@@ -161,71 +177,72 @@
       </div>
       <input type="submit">
     </form>
-  </div> <!-- END CREATE POST -->
+  </div>  --}}
+    <!-- END CREATE POST -->
 
 
 
-  <div class="post-container">
+    <div class="post-container">
 
-    <h1>Posts</h1>
+      <h1>Posts</h1>
 
-    {{#each listOfPosts}}
-    <div class="post-section">
+      {{#each listOfPosts}}
+      <div class="post-section">
 
-      <div class="post-card">
+        <div class="post-card">
 
-        <h2 id="post-title">
-          {{this.title}}
-        </h2>
-        <div class="post-container">
+          <h2 id="post-title">
+            {{this.title}}
+          </h2>
+          <div class="post-container">
 
-          {{#each listOfPosts}}
+            {{#each listOfPosts}}
 
-          <div class="post-card">
+            <div class="post-card">
 
-            <h2 id="post-title">
-              {{this.title}}
-            </h2>
+              <h2 id="post-title">
+                {{this.title}}
+              </h2>
 
-            <h4 id="post-date">
-              {{this.creation}}
-            </h4>
+              <h4 id="post-date">
+                {{this.creation}}
+              </h4>
 
-            <h4 id="post-date">
-              {{this.creation}}
-            </h4>
+              <h4 id="post-date">
+                {{this.creation}}
+              </h4>
 
-            <p id="post-description">
-              {{this.description}}
-            </p>
+              <p id="post-description">
+                {{this.description}}
+              </p>
 
-            <img id="post-image" src="{{this.image}}">
+              <img id="post-image" src="{{this.image}}">
 
-            <p id="post-child">
-              {{this.child}}
-            </p>
+              <p id="post-child">
+                {{this.child}}
+              </p>
+
+            </div>
+            {{/each}}
 
           </div>
-          {{/each}}
+
+
+          <p id="post-description">
+            {{this.description}}
+          </p>
+
+          <img id="post-image" src="{{this.image}}">
+
+          <p id="post-child">
+            {{this.child}}
+          </p>
 
         </div>
-
-
-        <p id="post-description">
-          {{this.description}}
-        </p>
-
-        <img id="post-image" src="{{this.image}}">
-
-        <p id="post-child">
-          {{this.child}}
-        </p>
-
+        {{/each}}
       </div>
-      {{/each}}
     </div>
-  </div>
 
 
 
-  <script src="/javascripts/new-post.js"></script>
+    <script src="/javascripts/new-post.js"></script>

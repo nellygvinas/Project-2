@@ -11,21 +11,20 @@ h2 {
   max-height: 33px;
   margin-left: 33px; }
 
-.side-nav {
+.sidenav {
   color: #fff;
   background-color: #ee6e73;
-  width: 56px;
-  line-height: 56px; }
+  width: 65px;
+  line-height: 56px;
+  height: 100vh;
+  position: fixed;
+  margin-top: -5px; }
 
-header,
-main,
-footer {
-  padding-left: 300px; }
+.avatar {
+  max-width: 63px;
+  padding: 5px; }
 
-@media only screen and (max-width: 992px) {
-  header,
-  main,
-  footer {
-    padding-left: 0; } }
+.sidebar-add-child-button {
+  padding: 5px; }
 
 /*# sourceMappingURL=style.css.map */
