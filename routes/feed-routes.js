@@ -136,6 +136,7 @@ router.post('/:id/remove', (req, res, next) => {
 
 // CHILD FEED =================================
 
+<<<<<<< HEAD
 router.get('/:childId', (req, res, next) => {
 
   const childId = req.params.id
@@ -165,6 +166,37 @@ router.get('/:childId', (req, res, next) => {
     .catch((err) => {
       next(err)
     })
+=======
+router.get('/:childId', (req, res, next)=>{
+  
+ const childId = req.params.childId 
+  
+  Child.findById(childId)
+  .then((child)=>{
+
+    Posting.find()
+    .then((posts) => {
+
+  
+     let postList = posts.map((eachPost)=>{
+        if(eachPost.creator.equals(req.user._id)){
+          eachPost.owned = true;
+          return eachPost
+        } else {
+          console.log("No postings found for this user.")
+        }
+      })
+    
+    res.render('child-feed', {theChild: child, listOfPosts: postList});
+  })
+  .catch((err)=>{
+    next(err)
+  })
+ })
+  .catch((err)=>{
+  next(err)
+  })
+>>>>>>> 87bb6bc4aa5ec2b5a42ed61f241247c0f794b90a
 
 })
 
