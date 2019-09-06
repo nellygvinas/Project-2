@@ -1,5 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
 
-  console.log('IronGenerator JS imported successfully!');
+// ------------------
+// DATEPICKER
+// ------------------
+$('.datepicker').pickadate({})
+// fix for auto close bug in chrome
+$('.datepicker').on('mousedown', function (event) { event.preventDefault() })
 
-}, false);
+// ------------------
+// MODAL
+// ------------------
+$(document).ready(function () {
+  $('.modal').modal()
+})
