@@ -138,9 +138,9 @@ router.post('/:id/remove', (req, res, next)=>{
 
 router.get('/:childId', (req, res, next)=>{
   
- const childId = req.params.id 
+ const childId = req.params.childId 
   
-  Child.find(childId)
+  Child.findById(childId)
   .then((child)=>{
 
     Posting.find()
