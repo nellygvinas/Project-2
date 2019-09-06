@@ -102,7 +102,7 @@ router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, re
     })
     .then((childCreated)=>{
 
-      console.log(childCreated)
+      console.log(`Child created: ${childCreated}`)
       User.findByIdAndUpdate(req.user._id, {$push: {children: childCreated}}, {new: true})
       .then(()=> {
 
@@ -128,8 +128,20 @@ router.post('/:id/remove', (req, res, next)=>{
   const id=req.params.id;
 
   Child.findByIdAndRemove(id)
-  .then(()=>{
-    res.redirect('/feed')
+  .then((childRemoved)=>{
+   
+    User.findByIdAndUpdate(req.user._id, {$pull: {children: childRemoved}}, {new: true})
+    .then(()=> {
+
+      req.flash('success','Child removed')
+
+      res.redirect('/feed')
+      //res redirect take a url as the argument
+    })
+    .catch((err) => {
+      next(err)
+    })
+    
   })
   .catch((err)=>{
     next(err);
