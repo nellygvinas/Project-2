@@ -1,5 +1,9 @@
 // $primary-color: whitesmoke;
 
+.container {
+  margin-top: 100px;
+}
+
 h1 {
   font-size: 2em;
 }
@@ -14,7 +18,27 @@ h2 {
 
 .logo {
   max-height: 33px;
-  margin-left: 33px;
+  margin-left: 63px;
+}
+
+nav {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+}
+
+.search-wrapper {
+  background: #ff8a80;
+  max-width: 300px;
+  height: 64px;
+}
+
+input[type="search"]:not(.browser-default):focus {
+  background: rgba(255, 206, 206, 0.523);
+}
+
+.magnify-icon {
+  margin-top: -10px;
 }
 
 .sidenav {
@@ -24,12 +48,12 @@ h2 {
   line-height: 56px;
   height: 100vh;
   position: fixed;
-  margin-top: -5px;
+  margin-top: -100px;
+  z-index: 100;
 }
 
 .toggle-avatars {
-  // margin-top: 53px;
-  // margin: 5px;
+  margin-top: 10vh;
 }
 
 .avatar {
@@ -39,4 +63,25 @@ h2 {
 
 .sidebar-add-child-button {
   padding: 5px;
+}
+
+#child-feed-avatar {
+  width: 100px;
+  height: 100px;
+  border: 5px solid white;
+}
+
+#child-feed-avatar img {
+  background-size: cover;
+}
+
+#child-feed-avatar .avatar {
+  max-width: 163px;
+  padding: 0;
+}
+
+.art-img {
+  background-size: cover;
+  height: 75px;
+  // margin: 5px;
 }

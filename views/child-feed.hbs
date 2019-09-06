@@ -1,64 +1,280 @@
-<a href="/feed">Back to Feed</a>
+{{!-- NAV --}}
+<!-- Dropdown -->
+<ul id="dropdown1" class="dropdown-content">
+  {{#if currentUser}}
+  <li><a href="/feed/user-details">Edit Profile</a></li>
+  <li><a href="/feed/logout">Logout</a>
+    {{!-- <form action="/logout" method="POST">
+    <a>Logout</a></form> --}}
+    {{/if}}
+  </li>
+</ul>
 
-<h1 id="child-name">
-{{theChild.name}}
-</h1>
+<!-- TOP NAV ================================== -->
+<nav>
+  <div class="nav-wrapper">
+    <a href="/" class="brand-logo">
+      <img src="/images/logo.png" alt="keepsake logo" class="logo">
+      Keepsake</a>
+
+    <ul class="right hide-on-med-and-down">
+      <li class="welcome">
+        {{#if currentUser}}
+        Welcome back, {{currentUser.username}}
+        {{/if}}
+      </li>
+
+      <li>
+        <div class="search-wrapper">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search"><i class="material-icons magnify-icon" placeholder="search artwork">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
+      </li>
+
+      {{!-- <li>
+        <a href="#"><i class="material-icons left">add</i>Add Artwork</a>
+      </li> --}}
+
+      <!-- Dropdown Trigger -->
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- SIDE NAV ================================== -->
+<div class="sidenav">
+  <ul class="toggle-avatars">
+    <li>
+      <a href="#child-1">
+        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
+      </a>
+    </li>
+    <li>
+      <a href="#child-21">
+        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
+      </a>
+    <li>
+    <li>
+      <a href="#child-3">
+        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
+      </a>
+    <li>
+    <li>
+      <div class="sidebar-add-child-button">
+        <a class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- CREATE CHILD MODAL -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Add Child</h4>
+    <div class="row">
+
+      <form class="col s12" action="/feed/create-child" method="POST" enctype="multipart/form-data">
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Ex: Johnny" id="first_name" type="text" class="validate" name="theName">
+            <label for="first_name">Child's Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="birthdate">Child's Birthdate</label>
+            <input type="text" class="datepicker" placeholder="Select Date" class="validate" name="theDateOfBirth">
+          </div>
+        </div>
+        <div class="row">
+          <div class="file-field input-field col s12">
+            <div class="btn waves-effect">
+              <span>File</span>
+              <input type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" placeholder="Upload an image of your child">
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <div class="col s12">
+            <button class="btn waves-effect waves-light btn-large modal-close" type="submit" name="action">Add Child
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div> <!-- END CHILD MODAL -->
 
 
-<h4 id="child-dob">
-Date of Birth {{theChild.dob}}
-</h4>
+<!-- MAIN CONTENT ================================== -->
+<div class="container">
 
+  <!-- BANNER -->
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card">
+        <div class="card-image">
+          <img src="/images/Artwork1.png">
+          <span class="card-title">
+            <h2 class="child-name">Child Name</h2>
+          </span>
+          <a class="btn-floating halfway-fab waves-effect waves-light white" id="child-feed-avatar">
+            <img class="circle avatar" src="/images/headshot-girl-square.jpg">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<img src="{{theChild.image}}" alt="">
+  <!-- ADD ARTWORK FORM -->
+  <div>
+    <ul class="collapsible">
+      <li>
+        <div class="collapsible-header"><i class="material-icons">add</i>Add Artwork</div>
+        <div class="collapsible-body">
 
+          <!-- Add a new piece to Child's portfolio. -->
+          <h2>Add a new piece to ${{this.name}}'s portfolio</h2>
 
+          <form action="" id="create-post">
 
-<div class="post-container">
+            <div class="input-field col s12">
+              <input id="postTitle" type="text" class="validate">
+              <label for="postTitle">Artwork Title</label>
+            </div>
 
+            <div class="input-field col s12">
+              <label for="postDate">Date of Creation</label>
+              <input type="text" class="datepicker" class="validate" name="postDate" id="postDate">
+            </div>
+
+            <form class="col s12">
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="postDescription" class="materialize-textarea"></textarea>
+                  <label for="textarea1">Things to remember about this piece...</label>
+                </div>
+              </div>
+            </form>
+
+            <div class="file-field input-field col s12">
+              <div class="btn waves-effect">
+                <span>Upload Artwork</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload Artwork" id="postImage">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <div class="col s12 right-align">
+                <button class="btn waves-effect waves-light btn-large modal-close" type="submit" name="action">Add Piece
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </li>
+
+  </div>
+  </li>
+
+  </ul>
+</div>
+
+<div class="add-artwork">
+
+</div> <!-- END ADD ARTWORK-->
+
+<div class="child-feed container">
+
+  <div class="row">
+    <div class="col m3 art-img">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed">
+    </div>
+    <div class="col m3 art-img">
+      <img src="/images/artwork-3.jpg" alt="" class="responsive-img materialboxed">
+    </div>
+    <div class="col m3 art-img">
+      <img src="/images/artwork-4.jpg" alt="" class="responsive-img materialboxed">
+    </div>
+    <div class="col m3 art-img">
+      <img src="/images/artwork-5.jpg" alt="" class="responsive-img materialboxed">
+    </div>
+  </div>
+
+  {{!-- <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="/images/Artwork1.png">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+      <p><a href="#">This is a link</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div> --}}
+
+</div>
+
+{{!-- <a href="/feed">Back to Feed</a> --}}
+
+{{!-- <h1 id="child-name">
+    {{theChild.name}}
+  </h1>
+
+  <h4 id="child-dob">
+    Date of Birth {{theChild.dob}}
+  </h4>
+
+  <img src="{{theChild.image}}" alt="">
+
+  <div class="post-container">
     <h1>Posts</h1>
-
     {{#each listOfPosts}}
     <div class="post-section">
-
       <div class="post-card">
-
         <h2 id="post-title">
           {{this.title}}
         </h2>
         <div class="post-container">
-
           {{#each listOfPosts}}
-
           <div class="post-card">
-
             <h2 id="post-title">
               {{this.title}}
             </h2>
-
             <h4 id="post-date">
               {{this.creation}}
             </h4>
-
             <h4 id="post-date">
               {{this.creation}}
             </h4>
-
             <p id="post-description">
               {{this.description}}
             </p>
-
             <img id="post-image" src="{{this.image}}">
-
             <p id="post-child">
               {{this.child}}
             </p>
-
           </div>
           {{/each}}
-
         </div>
-
 
         <p id="post-description">
           {{this.description}}
@@ -73,4 +289,18 @@ Date of Birth {{theChild.dob}}
       </div>
       {{/each}}
     </div>
-  </div>
+  </div> --}}
+
+</div> <!-- END CHILD FEED -->
+
+
+
+
+
+
+
+</div> <!-- END CONTAINER -->
+
+
+
+<script src="/javascripts/new-post.js"></script>
