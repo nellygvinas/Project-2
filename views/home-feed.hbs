@@ -70,22 +70,68 @@
         <div class="card-image">
           <img src="images/add-child.jpg">
           <span class="card-title">Add New Child</span>
-          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/feed/new-child"><i class="material-icons">add</i></a>
+          {{!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="/feed/new-child"><i class="material-icons">add</i></a> --}}
+          <a class="btn-floating halfway-fab waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
         </div>
       </div>
     </div>
 
+    <!-- CREATE CHILD MODAL -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Add Child</h4>
+        <div class="row">
+
+          <form class="col s12" action="/feed/create-child" method="POST" enctype="multipart/form-data">
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Ex: Johnny" id="first_name" type="text" class="validate" name="theName">
+                <label for="first_name">Child's Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <label for="birthdate">Child's Birthdate</label>
+                <input type="text" class="datepicker" placeholder="Select Date" class="validate" name="theDateOfBirth">
+              </div>
+            </div>
+            <div class="row">
+              <div class="file-field input-field col s12">
+                <div class="btn waves-effect">
+                  <span>File</span>
+                  <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload an image of your child">
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <div class="col s12">
+                <button class="btn waves-effect waves-light btn-large modal-close" type="submit" name="action">Add Child
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div> <!-- END CHILD MODAL -->
 
   </div> <!-- end child row -->
 
 
   <div>
 
-    {{!-- CREATE POST --}}
+    <!-- MOVE THIS TO THE CHILD FEED VIEW -->
+    <!-- should we call this "add artwork" instead? -->
     <h2>Create Post</h2>
-
     <form action="" id="create-post">
-
       <div>
         <label>Select Child</label>
         <select name="children" id="postChildId" multiple>
@@ -101,27 +147,21 @@
         <label>Title</label>
         <input type="text" id="postTitle">
       </div>
-
       <div>
         <label>Date Created</label>
         <input type="date" id="postDate">
       </div>
-
       <div>
         <label>Description</label>
         <input type="text" id="postDescription">
       </div>
-
       <div>
         <label>Add Image</label>
         <input type="file" id="postImage">
       </div>
-
       <input type="submit">
-
     </form>
-
-  </div>
+  </div> <!-- END CREATE POST -->
 
 
 
