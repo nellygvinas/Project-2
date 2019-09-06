@@ -7,7 +7,7 @@ const User = require('../models/User');
 const fileUploadMiddleWare = require('../config/cloudinary-file');
 
 
-// The GET request to get the feed once logged in:
+// LOAD HOME FEED =================================
 
 router.get('/', (req, res, next)=>{
   if(!req.user){
@@ -57,25 +57,6 @@ router.get('/', (req, res, next)=>{
 
 }) // end of get request for home feed.
 
-// USER DETAILS PAGE
-
-router.get('/user-details', (req, res, next)=>{
-  const userId = req.user._id;
-  
-  User.findById(userId)
-  .then((userInfo)=>{
-    let userArr = userInfo.data
-    console.log(userArr);
-    res.render('user-details', {theUser: userInfo})
-  })
-  .catch((err)=>{
-    next(err)
-  })
-  })
-
-
-//req.user._id
-
 
 // CREATE CHILD  =================================
 
@@ -100,21 +81,12 @@ router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, re
       image: image,
       creator: req.user._id
     })
-    .then((childCreated)=>{
+    .then(()=>{
 
-      console.log(childCreated)
-      User.findByIdAndUpdate(req.user._id, {$push: {children: childCreated}}, {new: true})
-      .then(()=> {
+      req.flash('success','New Child successfully added')
 
-        req.flash('success','New Child successfully added')
-  
-        res.redirect('/feed')
-        //res redirect take a url as the argument
-      })
-      .catch((err) => {
-        next(err)
-      })
-
+      res.redirect('/feed')
+      //res redirect take a url as the argument
     })
     .catch((err)=>{
       next(err)
@@ -122,22 +94,7 @@ router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, re
 })
 
 
-// REMOVE CHILD
-
-router.post('/:id/remove', (req, res, next)=>{
-  const id=req.params.id;
-
-  Child.findByIdAndRemove(id)
-  .then(()=>{
-    res.redirect('/feed')
-  })
-  .catch((err)=>{
-    next(err);
-  })
-})
-
-
-// GET CHILD DETAILS
+// GET CHILD DETAILS =================================
 
 router.get('/details/:idVariable', (req, res, next)=>{
   const theID = req.params.idVariable;
@@ -152,26 +109,32 @@ router.get('/details/:idVariable', (req, res, next)=>{
   })
 
 
-// REMOVE CHILD
+// REMOVE CHILD =================================
 
-router.post('/:id/remove-child', (req, res, next)=>{
-  const id = req.params.id;
-  console.log(id)
+router.post('/:id/remove', (req, res, next)=>{
+  const id=req.params.id;
 
   Child.findByIdAndRemove(id)
-  .then(()=>{
+  .then((childRemoved)=>{
+   
+    req.flash('success','Child removed')
+
     res.redirect('/feed')
+    //res redirect take a url as the argument
   })
   .catch((err)=>{
     next(err);
   })
 })
 
-// NEW POST
+
+
+// NEW POST =================================
 //router.post('')
 
 
-// CHILD FEED
+
+// CHILD FEED =================================
 
 router.get('/feed/:id', (req, res, next)=>{
   

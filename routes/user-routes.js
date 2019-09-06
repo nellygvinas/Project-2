@@ -7,11 +7,16 @@ const bcrypt = require('bcryptjs');
 const passport = require("passport");
 
 
+// INDEX PAGE - FOR LOGIN AND SIGNUP ===============================
+
 router.get('/', (req, res, next)=>{
   res.render('index')
 })
 
-// Signup form will be a post request to the homepage. The form is on the homepage view.
+
+// SIGNUP =========================================================
+// post request to the homepage. The form is on the homepage view. 
+
 router.post('/signup', (req, res, next)=>{
 
     let username = req.body.theUsername;
@@ -38,7 +43,10 @@ router.post('/signup', (req, res, next)=>{
     })
 })
 
-// Login form will be a post request on the index - homepage
+
+// LOGIN  =========================================================
+// form will be a post request on the index - homepage 
+
 router.post('/login', passport.authenticate("local", {
   successRedirect: "/feed",
   failureRedirect: "/",
@@ -70,32 +78,54 @@ router.post('/login', passport.authenticate("local", {
   //   next(error);
   // })
   // begin new version with passport
-
 // })
 
-// LOGOUT
 
-router.get('feed/logout', (req, res, next)=>{
+
+// LOGOUT =============================================
+
+router.get('/feed/logout', (req, res, next)=>{
   req.logout();
   res.redirect('/')
 })
 
-// USER DETAILS PAGE
 
-router.get('feed/user-details', (req, res, next)=>{
-  res.render()
-  res.redirect('/')
+// USER DETAILS PAGE =================================
+// Link is on the home feed page.
+
+router.get('/feed/user-details', (req, res, next)=>{
+  const userId = req.user._id;
+  
+  User.findById(userId)
+  .then((userInfo)=>{
+    let userArr = userInfo.data
+    console.log(userArr);
+    res.render('user-details', {theUser: userInfo})
+  })
+  .catch((err)=>{
+    next(err)
+  })
+  })
+
+
+
+// DELETE USER =====================================
+
+router.post('/feed/user-details/:id/remove', (req, res, next)=>{
+  const userId=req.user._id;
+
+  User.findByIdAndRemove(userId)
+  .then(()=>{
+   
+    req.flash('success','The user account has been deleted.')
+
+    res.redirect('/')
+    //res redirect take a url as the argument
+  })
+  .catch((err)=>{
+    next(err);
+  })
 })
-
-
-// Viewing a secret page
-// router.get('/secret' ,(req, res, next)=>{
-//   if(!req.user){
-//     req.flash('error', 'please log in to view the secret page')
-//     res.redirect('/login')
-//   }
-//         res.render('secret') 
-// })
 
 
 module.exports = router;
