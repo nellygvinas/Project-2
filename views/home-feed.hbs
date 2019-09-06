@@ -1,12 +1,11 @@
 {{!-- NAV --}}
 <!-- Dropdown -->
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">Edit Profile</a></li>
-  <li>
-    {{#if currentUser}}
-    <form action="/logout" method="POST">
-      <button>Logout</button>
-    </form>
+  {{#if currentUser}}
+  <li><a href="/feed/user-details">Edit Profile</a></li>
+  <li><a href="/feed/logout">Logout</a>
+    {{!-- <form action="/logout" method="POST">
+    <a>Logout</a></form> --}}
     {{/if}}
   </li>
 </ul>
@@ -52,51 +51,32 @@
 
   <div class="row">
 
+    {{#each listOfChildren}}
+    {{#if this.owned}}
     <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
-          <img src="images/headshot-girl.jpg">
-          <span class="card-title">Child Name</span>
-          <a href="/feed/new-child" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          <img src="{{this.image}}">
+          <span class="card-title"><a href="/feed/details/{{this._id}}">{{this.name}}</a></span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
         </div>
       </div>
     </div>
+    {{/if}}
+    {{/each}}
 
     <div class="col s12 m4">
       <div class="card">
         <div class="card-image">
           <img src="images/add-child.jpg">
           <span class="card-title">Add New Child</span>
-          <a href="/feed/new-child" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/feed/new-child"><i class="material-icons">add</i></a>
         </div>
       </div>
     </div>
 
+
   </div> <!-- end child row -->
-
-  {{#each listOfChildren}}
-
-  {{#if this.owned}}
-
-  <div class="card">
-    <a href="/feed/{{this._id}}">
-      <h3>{{this.name}}
-      </h3>
-
-      <a href="/feed/details/{{this._id}}">
-        <p>Edit details for {{this.name}}
-        </p>
-      </a>
-  </div>
-
-  {{else}}
-  {{/if}}
-
-  {{/each}}
-
-
-
-  {{!-- <a href="/feed/new-child">Add New Child</a> --}}
 
 
   <div>

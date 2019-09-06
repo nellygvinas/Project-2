@@ -14,8 +14,9 @@ router.get('/', (req, res, next)=>{
     req.flash('Error', 'Please login to view.')
     //res.redirect('/')
   }
-  console.log('------------------------')
+  console.log('SESSION------------------------')
   console.log(req.user)
+  console.log('-------------------------------')
   
   Child.find()
   .then((children)=>{
@@ -55,6 +56,25 @@ router.get('/', (req, res, next)=>{
   })
 
 }) // end of get request for home feed.
+
+// USER DETAILS PAGE
+
+router.get('/user-details', (req, res, next)=>{
+  const userId = req.user._id;
+  
+  User.findById(userId)
+  .then((userInfo)=>{
+    let userArr = userInfo.data
+    console.log(userArr);
+    res.render('user-details', {theUser: userInfo})
+  })
+  .catch((err)=>{
+    next(err)
+  })
+  })
+
+
+//req.user._id
 
 
 // CREATE CHILD  =================================
@@ -148,17 +168,53 @@ router.post('/:id/remove-child', (req, res, next)=>{
 })
 
 // NEW POST
-router.post('')
+//router.post('')
 
 
+// CHILD FEED
 
-// LOGOUT
+router.get('/feed/:id', (req, res, next)=>{
+  
+ // const childId = 
+  
+  Child.find()
+  .then((children)=>{
 
-router.post('/logout', (req, res, next)=>{
-  req.logout();
-  res.redirect('/')
+    Posting.find()
+    .then((posts) => {
+
+    console.log(children)
+    console.log(posts)
+
+     let childList = children.map((eachChild)=>{
+        if(eachChild.creator.equals(req.user._id)){
+        eachChild.owned = true;
+        return eachChild
+        } else{
+        console.log("No children found for this user.")
+        }
+      })
+  
+     let postList = posts.map((eachPost)=>{
+        if(eachPost.creator.equals(req.user._id)){
+          eachPost.owned = true;
+          return eachPost
+        } else {
+          console.log("No postings found for this user.")
+        }
+      })
+    
+    res.render('home-feed', {listOfChildren: childList, listOfPosts: postList});
+  })
+  .catch((err)=>{
+    next(err)
+  })
+ })
+  .catch((err)=>{
+  next(err)
+  })
+
 })
-
 
 
 
