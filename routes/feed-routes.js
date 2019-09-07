@@ -36,16 +36,16 @@ router.get('/', (req, res, next) => {
             }
           })
 
-          let postList = posts.map((eachPost) => {
-            if (eachPost.creator.equals(req.user._id)) {
-              eachPost.owned = true;
-              return eachPost
-            } else {
-              console.log("No postings found for this user.")
-            }
-          })
+          // let postList = posts.map((eachPost) => {
+          //   if (eachPost.creator.equals(req.user._id)) {
+          //     eachPost.owned = true;
+          //     return eachPost
+          //   } else {
+          //     console.log("No postings found for this user.")
+          //   }
+          // })
 
-          res.render('home-feed', { listOfChildren: childList, listOfPosts: postList });
+          res.render('home-feed', { listOfChildren: childList/*,listOfPosts: postList*/ });
         })
         .catch((err) => {
           next(err)
@@ -128,14 +128,9 @@ router.post('/:id/remove', (req, res, next) => {
 })
 
 
-
-// NEW POST =================================
-//router.post('')
-
-
-
 // CHILD FEED =================================
 
+<<<<<<< HEAD
 router.get('/:childId', (req, res, next) => {
 
   const childId = req.params.childId
@@ -165,8 +160,122 @@ router.get('/:childId', (req, res, next) => {
     .catch((err) => {
       next(err)
     })
+=======
+router.get('/:childId', (req, res, next)=>{
+  
+ const childId = req.params.childId 
+  
+  Child.findById(childId)
+  .then((child)=>{
+
+    Posting.find()
+    .then((posts) => {
+
+      // let postList = posts.map((eachPost)=>{
+      // if(eachPost.creator.equals(req.user._id)){
+      //   eachPost.owned = true;
+      //   return eachPost
+      // } else {
+      //   console.log("No postings found for this user.")
+      // }
+      // })
+    
+    res.render('child-feed', {theChild: child/*, listOfPosts: postList*/});
+  })
+  .catch((err)=>{
+    next(err)
+  })
+ })
+  .catch((err)=>{
+  next(err)
+  })
+>>>>>>> a7ba61bd3fb69937f7cf5d4624c6fff4f69442e5
 
 })
+
+
+// CREATE POST ====================================================
+
+router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req, res, next)=>{
+  
+  const childId = req.params.childId 
+  let artTitle = req.body.artTitle;
+  let dateCreated = req.body.dateCreated;
+  let description = req.body.description
+  let image = '/images/no-art.jpg';
+
+  // posting model: 
+  // title: String,
+  // creation: Date,
+  // description: String,
+  // image: String,
+  // child: [{type: Schema.Types.ObjectId, ref: 'Child'}],
+  // creator: {type: Schema.Types.ObjectId, ref: 'User'}
+
+  if (req.file) {
+    image = req.file.url;
+  }
+
+  Child.findById(childId)
+    .then((child)=> {
+    
+      Posting.create({
+        title: artTitle,
+        creation: dateCreated,
+        description: description,
+        image: image,
+        child: childId,
+        creator: req.user._id
+       })
+      .then((post) => {
+  
+        req.flash('success', 'New art successfully added')
+  
+        res.render('child-feed', {childPosts: post, theChild: child})
+        
+      })
+      .catch((err) => {
+        next(err)
+      })
+
+     })
+    .catch((err)=>{
+    next(err)
+    }) // end of .catch for childfindbyid
+
+}) // end of router.post
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
