@@ -88,5 +88,37 @@ footer {
   font-size: 11px;
   color: #777;
   padding: 20px;
+}
 
+#index-page-logo {
+  max-width: 200px;
+  margin: 80px;
+}
+
+.index-page-left h3 {
+  color: white;
+  font-size: 2em;
+  margin: 0 30px 0 80px;
+  line-height: 130%;
+}
+
+.index-page-container {
+  background-image: url('/images/bg.jpg');
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+}
+
+.index-page-left {
+  width: 40vw;
+}
+
+
+
+.index-page-right {
+  width: 60vw;
+}
+
+.login-box {
+  width: 60%;
 }
