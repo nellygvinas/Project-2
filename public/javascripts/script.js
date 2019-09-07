@@ -12,3 +12,5 @@ $('.datepicker').on('mousedown', function (event) { event.preventDefault() })
 $(document).ready(function () {
   $('.modal').modal()
 })
+
+

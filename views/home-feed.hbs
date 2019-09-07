@@ -23,15 +23,20 @@
         Welcome back, {{currentUser.username}}
         {{/if}}
       </li>
-
       <li>
-        <a href="#"><i class="material-icons left">search</i>Search</a>
+        <div class="search-wrapper">
+          <form>
+            <div class="input-field">
+              <input id="search" type="search" required>
+              <label class="label-icon" for="search"><i class="material-icons magnify-icon" placeholder="search artwork">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+        </div>
       </li>
-
-      <li>
+      {{!-- <li>
         <a href="#"><i class="material-icons left">add</i>Add Artwork</a>
-      </li>
-
+      </li> --}}
       <!-- Dropdown Trigger -->
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
@@ -69,28 +74,32 @@
 <div class="container">
   <h2>Children</h2>
 
-  <div class="row">
+  <div class="row  children-row">
 
     {{#each listOfChildren}}
     {{#if this.owned}}
-    <div class="col s12 m4">
-      <div class="card">
-        <div class="card-image">
-          <img src="{{this.image}}">
-          <span class="card-title"><a href="/feed/details/{{this._id}}">{{this.name}}</a></span>
-          <a class="btn-floating halfway-fab waves-effect waves-light red" href="/feed/{{this._id}}"><i class="material-icons">add</i></a>
+    <div class="col s12 m2">
+
+      <a href="/feed/{{this._id}}">
+        <div class="card">
+          <div class="card-image">
+            <img src="{{this.image}}">
+            <span class="card-title">
+              {{this.name}}
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
+
     </div>
     {{/if}}
     {{/each}}
 
-    <div class="col s12 m4">
+    <div class="col s12 m2">
       <div class="card">
         <div class="card-image">
           <img src="images/add-child.jpg">
           <span class="card-title">Add New Child</span>
-          {{!-- <a class="btn-floating halfway-fab waves-effect waves-light red" href="/feed/new-child"><i class="material-icons">add</i></a> --}}
           <a class="btn-floating halfway-fab waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
         </div>
       </div>
@@ -241,6 +250,11 @@
         </div>
         {{/each}}
       </div>
+      <footer>
+        <div class="right">
+          ©2019 all rights reserved. A project by Dusty Garon & Nelly Gonzalez-Vinas.
+        </div>
+      </footer>
     </div>
 
 
