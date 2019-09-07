@@ -144,7 +144,9 @@
           <!-- Add a new piece to Child's portfolio. -->
           <h2>Add a new piece to {{theChild.name}}'s portfolio</h2>
 
-          <form action="/feed/{{theChild._id}}/new-post" id="create-post" method="POST" enctype="multipart/form-data">
+          <form id="create-post" >
+
+            <input type="hidden" id="childId" value="{{theChild._id}}">
 
             <div class="input-field col s12">
               <input id="postTitle" type="text" class="validate" name="artTitle">
@@ -168,7 +170,7 @@
             <div class="file-field input-field col s12">
               <div class="btn waves-effect">
                 <span>Upload Artwork</span>
-                <input type="file">
+                <input type="file" id="upload-file">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload Artwork" id="postImage">
@@ -177,7 +179,7 @@
 
             <div class="modal-footer">
               <div class="col s12 right-align">
-                <button class="btn waves-effect waves-light btn-large modal-close" type="submit" name="action">Add Piece
+                <button id="add-art-btn" class="btn waves-effect waves-light btn-large modal-close" type="submit" name="action">Add Piece
                   <i class="material-icons right">send</i>
                 </button>
               </div>
@@ -200,6 +202,10 @@
 <div class="child-feed container">
 
   <div class="row">
+    {{#each listOfPosts}}
+      <div class="col m3 art-img">
+      <img src="{{this.image}}" alt="" class="responsive-img materialboxed">
+    {{/each}}
     <div class="col m3 art-img">
       <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed">
     </div>

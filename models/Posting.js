@@ -7,7 +7,7 @@ const postingSchema = new Schema({
     creation: Date,
     description: String,
     image: String,
-    child: [{type: Schema.Types.ObjectId, ref: 'Child'}],
+    child: {type: Schema.Types.ObjectId, ref: 'Child'},
     creator: {type: Schema.Types.ObjectId, ref: 'User'}
 })
 
