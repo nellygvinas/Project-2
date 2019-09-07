@@ -24,8 +24,6 @@ router.get('/', (req, res, next) => {
       Posting.find()
         .then((posts) => {
 
-          console.log(children)
-          console.log(posts)
 
           let childList = children.map((eachChild) => {
             if (eachChild.creator.equals(req.user._id)) {
@@ -36,14 +34,14 @@ router.get('/', (req, res, next) => {
             }
           })
 
-          // let postList = posts.map((eachPost) => {
-          //   if (eachPost.creator.equals(req.user._id)) {
-          //     eachPost.owned = true;
-          //     return eachPost
-          //   } else {
-          //     console.log("No postings found for this user.")
-          //   }
-          // })
+          let postList = posts.map((eachPost) => {
+            if (eachPost.creator.equals(req.user._id)) {
+            eachPost.owned = true;
+            return eachPost
+            } else {
+            console.log("No postings found for this user.")
+            }
+            })
 
           res.render('home-feed', { listOfChildren: childList/*,listOfPosts: postList*/ });
         })
@@ -93,7 +91,6 @@ router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, re
     })
 })
 
-
 // GET CHILD DETAILS =================================
 
 router.get('/details/:idVariable', (req, res, next) => {
@@ -128,7 +125,7 @@ router.post('/:id/remove', (req, res, next) => {
 })
 
 
-// CHILD FEED =================================
+// LOAD CHILD FEED =================================
 
 router.get('/:childId', (req, res, next) => {
 
@@ -213,22 +210,7 @@ router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req,
 
 }) // end of router.post
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 

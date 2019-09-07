@@ -127,5 +127,8 @@ app.use('/feed', feedRoutes);
 const childFeedRoutes = require('./routes/child-feed-routes');
 app.use('/feed', childFeedRoutes);
 
+const feedApiRoutes = require('./routes/feed-api-routes');
+app.use('/', feedApiRoutes);
+
 
 module.exports = app;

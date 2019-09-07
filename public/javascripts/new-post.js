@@ -1,32 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
-  let inputs = document.querySelectorAll('#create-post input')
-
- for(let i=0; i < inputs.length; i++){
 
 
-   inputs[i].onsubmit = function(){
+  document.getElementById('create-post').onsubmit = function(event){
+
+    event.preventDefault();
+
+    let title = document.getElementById('postTitle').value;
+    let date = document.getElementById('postDate').value;
+    let description = document.getElementById('postDescription').value;
+    let childId = document.getElementById('childId').value;
+
+    let image = document.getElementById('upload-file').files[0];
+
+//  let inputs = document.querySelectorAll('#create-post input')
+
+//  for(let i=0; i < inputs.length; i++){
+
+
+//    inputs[i].onsubmit = function(e){
        
-      console.log("submit button clicked")
-      // Get value of child name list  
-      let childNameList = document.getElementById('postChildId').value;
-      // Grabs id value of actual selected child from the child list
-       let childIdValue = childNameList.options[childNameList.selectedIndex].value;
-       
-       let title = document.getElementById('postTitle').value;
-       let date = document.getElementById('postDate').value;
-       let description = document.getElementById('postDescription').value;
-       let image = document.getElementById('postImage').value;
+//       console.log("submit button clicked")
+//       // Get value of child name list  
+//       let childNameList = document.getElementById('postChildId').value;
+//       // Grabs id value of actual selected child from the child list
+//        let childIdValue = childNameList.options[childNameList.selectedIndex].value;
+
+
+const formData = new FormData();
+
+formData.append('postTitle', title);
+formData.append('postDate', date);
+formData.append('postDescription', description);
+formData.append('postChildId', childId);
+formData.append('postImage', image);
+
 
 // make axios request and send the correct stuff in req.body
-     axios.post('/api/feed/new-post', {
-         postTitle: title,
-         postDate: date,
-         postDescription: description,
-         postImage: image,
-         postChildId: childIdValue
-     })
+     axios.post('/api/feed/new-post', formData)
      .then((result)=>{
 
     
@@ -66,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
           //  document.getElementById('post-description').innerText = newPost.description
           //  document.getElementById('post-image').innerHTML = newPost.image
           //  document.getElementById('post-child').innerText = newPost.child
-
-
        })
        .catch((err)=>{
            console.log(err);
@@ -77,9 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(err);
       })
 
-    }
-
-  }
-
     
-}, false);
+    
+    }  // end of on-click function
+
+  }, false); // end of document event listener
