@@ -13,18 +13,16 @@
 <!-- TOP NAV ================================== -->
 <nav>
   <div class="nav-wrapper">
-    <a href="/" class="brand-logo">
+    <a href="/feed" class="brand-logo">
       <img src="/images/logo.png" alt="keepsake logo" class="logo">
       Keepsake</a>
 
-<<<<<<< HEAD
     <ul class="right hide-on-med-and-down">
       <li class="welcome">
         {{#if currentUser}}
         Welcome back, {{currentUser.username}}
         {{/if}}
       </li>
-
       <li>
         <div class="search-wrapper">
           <form>
@@ -36,19 +34,14 @@
           </form>
         </div>
       </li>
-
       {{!-- <li>
         <a href="#"><i class="material-icons left">add</i>Add Artwork</a>
       </li> --}}
-
       <!-- Dropdown Trigger -->
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">My Account<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
   </div>
 </nav>
-=======
-<img src="{{theChild.image}}" alt="">
->>>>>>> 87bb6bc4aa5ec2b5a42ed61f241247c0f794b90a
 
 <!-- SIDE NAV ================================== -->
 <div class="sidenav">
@@ -131,10 +124,10 @@
         <div class="card-image">
           <img src="/images/Artwork1.png">
           <span class="card-title">
-            <h2 class="child-name">Child Name</h2>
+            <h2 class="child-name">{{theChild.name}}</h2>
           </span>
           <a class="btn-floating halfway-fab waves-effect waves-light white" id="child-feed-avatar">
-            <img class="circle avatar" src="/images/headshot-girl-square.jpg">
+            <img class="circle avatar" src="{{theChild.image}}" alt="Child avatar">
           </a>
         </div>
       </div>
@@ -149,28 +142,28 @@
         <div class="collapsible-body">
 
           <!-- Add a new piece to Child's portfolio. -->
-          <h2>Add a new piece to ${{this.name}}'s portfolio</h2>
+          <h2>Add a new piece to {{theChild.name}}'s portfolio</h2>
 
-          <form action="" id="create-post">
+          <form action="/feed/{{theChild._id}}/new-post" id="create-post" method="POST" enctype="multipart/form-data">
 
             <div class="input-field col s12">
-              <input id="postTitle" type="text" class="validate">
+              <input id="postTitle" type="text" class="validate" name="artTitle">
               <label for="postTitle">Artwork Title</label>
             </div>
 
             <div class="input-field col s12">
               <label for="postDate">Date of Creation</label>
-              <input type="text" class="datepicker" class="validate" name="postDate" id="postDate">
+              <input type="text" class="datepicker" class="validate" name="dateCreated" id="postDate">
             </div>
 
-            <form class="col s12">
+            {{!-- <form class="col s12"> --}}
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea id="postDescription" class="materialize-textarea"></textarea>
+                  <textarea id="postDescription" class="materialize-textarea" name="description"></textarea>
                   <label for="textarea1">Things to remember about this piece...</label>
                 </div>
               </div>
-            </form>
+            {{!-- </form> --}}
 
             <div class="file-field input-field col s12">
               <div class="btn waves-effect">
