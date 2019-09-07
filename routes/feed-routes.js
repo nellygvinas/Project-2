@@ -127,44 +127,43 @@ router.post('/:id/remove', (req, res, next) => {
 
 // LOAD CHILD FEED =================================
 
-// router.get('/:childId', (req, res, next)=>{
-  
-//   const childId = req.params.childId 
-//   const filter = { child: childId }
-   
-//    Child.findById(childId)
-//    .then((child)=>{
+router.get('/:childId', (req, res, next) => {
 
-//      Posting.find(filter)
-//      .then((posts) => {
- 
-//       let postList = posts.map((eachPost)=>{
-//        if(eachPost.creator.equals(req.user._id)){
-//          eachPost.owned = true;
-//          return eachPost
-//        } else {
-//          console.log("No postings found for this user.")
-//        }
-//        })
-     
-//      res.render('child-feed', {theChild: child, listOfPosts: postList});
-//    })
-//    .catch((err)=>{
-//      next(err)
-//    })
-//   })
-//    .catch((err)=>{
-//    next(err)
-//    })
- 
-//  })
- 
+  const childId = req.params.childId
+
+  Child.findById(childId)
+    .then((child) => {
+
+      Posting.find()
+        .then((posts) => {
+
+          // let postList = posts.map((eachPost)=>{
+          // if(eachPost.creator.equals(req.user._id)){
+          //   eachPost.owned = true;
+          //   return eachPost
+          // } else {
+          //   console.log("No postings found for this user.")
+          // }
+          // })
+
+          res.render('child-feed', { theChild: child/*, listOfPosts: postList*/ });
+        })
+        .catch((err) => {
+          next(err)
+        })
+    })
+    .catch((err) => {
+      next(err)
+    })
+
+})
+
 
 // CREATE POST ====================================================
 
-router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req, res, next)=>{
-  
-  const childId = req.params.childId 
+router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req, res, next) => {
+
+  const childId = req.params.childId
   let artTitle = req.body.artTitle;
   let dateCreated = req.body.dateCreated;
   let description = req.body.description
@@ -183,8 +182,8 @@ router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req,
   }
 
   Child.findById(childId)
-    .then((child)=> {
-    
+    .then((child) => {
+
       Posting.create({
         title: artTitle,
         creation: dateCreated,
@@ -192,21 +191,21 @@ router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req,
         image: image,
         child: childId,
         creator: req.user._id
-       })
-      .then((post) => {
-  
-        req.flash('success', 'New art successfully added')
-  
-        res.render('child-feed', {childPosts: post, theChild: child})
-        
       })
-      .catch((err) => {
-        next(err)
-      })
+        .then((post) => {
 
-     })
-    .catch((err)=>{
-    next(err)
+          req.flash('success', 'New art successfully added')
+
+          res.render('child-feed', { childPosts: post, theChild: child })
+
+        })
+        .catch((err) => {
+          next(err)
+        })
+
+    })
+    .catch((err) => {
+      next(err)
     }) // end of .catch for childfindbyid
 
 }) // end of router.post

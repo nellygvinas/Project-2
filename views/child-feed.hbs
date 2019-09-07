@@ -43,6 +43,7 @@
   </div>
 </nav>
 
+
 <!-- SIDE NAV ================================== -->
 <div class="sidenav">
   <ul class="toggle-avatars">
@@ -159,12 +160,12 @@
             </div>
 
             {{!-- <form class="col s12"> --}}
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="postDescription" class="materialize-textarea" name="description"></textarea>
-                  <label for="textarea1">Things to remember about this piece...</label>
-                </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="postDescription" class="materialize-textarea" name="description"></textarea>
+                <label for="textarea1">Things to remember about this piece...</label>
               </div>
+            </div>
             {{!-- </form> --}}
 
             <div class="file-field input-field col s12">
@@ -199,28 +200,62 @@
 
 </div> <!-- END ADD ARTWORK-->
 
+
+
+<!-- GALLERY IMAGES GRID-->
 <div class="child-feed container">
 
   <div class="row">
+<<<<<<< HEAD
     {{#each listOfPosts}}
       <div class="col m3 art-img">
       <img src="{{this.image}}" alt="" class="responsive-img materialboxed">
     {{/each}}
     <div class="col m3 art-img">
       <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed">
+=======
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
     </div>
-    <div class="col m3 art-img">
-      <img src="/images/artwork-3.jpg" alt="" class="responsive-img materialboxed">
+
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
     </div>
-    <div class="col m3 art-img">
-      <img src="/images/artwork-4.jpg" alt="" class="responsive-img materialboxed">
+
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
     </div>
-    <div class="col m3 art-img">
-      <img src="/images/artwork-5.jpg" alt="" class="responsive-img materialboxed">
+
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
     </div>
   </div>
 
-  {{!-- <div class="card">
+  <div class="row">
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
+>>>>>>> ecb591a06130adb39338420e5f649e8f1b7d610b
+    </div>
+
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
+    </div>
+
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
+    </div>
+
+    <div class="col s12 m3">
+      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
+    </div>
+  </div>
+
+
+</div> <!-- end child feed container -->
+
+
+
+{{!-- <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
       <img class="activator" src="/images/Artwork1.png">
     </div>
@@ -296,12 +331,11 @@
 
 </div> <!-- END CHILD FEED -->
 
-
-
-
-
-
-
+<footer>
+  <div class="right">
+    ©2019 all rights reserved. A project by Dusty Garon & Nelly Gonzalez-Vinas.
+  </div>
+</footer>
 </div> <!-- END CONTAINER -->
 
 
