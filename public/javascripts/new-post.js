@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
-
-
   document.getElementById('create-post').onsubmit = function(event){
 
     event.preventDefault();
@@ -13,19 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let childId = document.getElementById('childId').value;
 
     let image = document.getElementById('upload-file').files[0];
-
-//  let inputs = document.querySelectorAll('#create-post input')
-
-//  for(let i=0; i < inputs.length; i++){
-
-
-//    inputs[i].onsubmit = function(e){
-       
-//       console.log("submit button clicked")
-//       // Get value of child name list  
-//       let childNameList = document.getElementById('postChildId').value;
-//       // Grabs id value of actual selected child from the child list
-//        let childIdValue = childNameList.options[childNameList.selectedIndex].value;
 
 
 const formData = new FormData();
@@ -41,14 +26,26 @@ formData.append('postImage', image);
      axios.post('/api/feed/new-post', formData)
      .then((result)=>{
 
-    
-        console.log(result)
+        console.log(`result data: ----------------------------${result.data}`)
+
+        let createdPost = result.data
+
+        
+        let theTitle = createdPost.postTitle
+        let theDate = createdPost.postDate
+        let theDescription = createdPost.postDescription
+        let theId  = createdPost.postChildId
+        let theImage = createdPost.postImage
+
+        console.log(theTitle, theDate, theDescription, theId)
+
 
       //  Possibly make another axios request to get new updated info ??
         axios.get('/feed')
           .then((response)=>{
            // take the new updated info and put it on the page
           let newPost = response.data;
+
 
           $(".post-container").prepend(`<div class="post-card">
     
