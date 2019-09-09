@@ -26,59 +26,35 @@ formData.append('postImage', image);
      axios.post('/api/feed/new-post', formData)
      .then((result)=>{
 
-        console.log(`result data: ----------------------------${result.data}`)
-
-        let createdPost = result.data
-
-        
-        let theTitle = createdPost.postTitle
-        let theDate = createdPost.postDate
-        let theDescription = createdPost.postDescription
-        let theId  = createdPost.postChildId
-        let theImage = createdPost.postImage
-
-        console.log(theTitle, theDate, theDescription, theId)
+        console.log(`result data: ----------------------------${result.data[0]}`)
 
 
       //  Possibly make another axios request to get new updated info ??
-        axios.get('/feed')
-          .then((response)=>{
-           // take the new updated info and put it on the page
-          let newPost = response.data;
+      //   axios.get('/api/feed/created-post')
+      //     .then((response)=>{
+      //      // take the new updated info and put it on the page
+      //      let createdPost = response.data
 
+      //       console.log(createdPost)
 
-          $(".post-container").prepend(`<div class="post-card">
-    
-          <h2 id="post-title">
-          ${newPost.title}
-          </h2>
-    
-    
-          <h4 id="post-date">
-          ${newPost.creation}
-          </h4>
-    
-    
-          <p id="post-description">
-          ${newPost.description}
-          </p>
-    
-          <img id="post-image" src="{{this.image}}">
-    
-          <p id="post-child">
-          ${newPost.child}
-          // </p>`)
+      //      let theTitle = createdPost.title
+      //      let theDate = createdPost.date
+      //      let theDescription = createdPost.description
+      //      let theId  = createdPost.childId
+      //      let theImage = createdPost.image
+   
+      //      console.log(theTitle, theDate, theDescription, theId)
+   
 
+      //     $("div.child-feed container > row").prepend(`<div class="col s12 m3">
+      //     <img src="${theImage}" alt="" class="responsive-img materialboxed  art-img">
+      //     </div>`)
 
-          //  document.getElementById('post-title').innerText = newPost.title
-          //  document.getElementById('post-date').innerText = newPost.creation
-          //  document.getElementById('post-description').innerText = newPost.description
-          //  document.getElementById('post-image').innerHTML = newPost.image
-          //  document.getElementById('post-child').innerText = newPost.child
-       })
-       .catch((err)=>{
-           console.log(err);
-        })
+      
+      //  })
+      //  .catch((err)=>{
+      //      console.log(err);
+      //   })
       })
        .catch((err)=>{
         console.log(err);
