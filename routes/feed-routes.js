@@ -24,7 +24,6 @@ router.get('/', (req, res, next) => {
       Posting.find()
         .then((posts) => {
 
-
           let childList = children.map((eachChild) => {
             if (eachChild.creator.equals(req.user._id)) {
               eachChild.owned = true;
@@ -43,7 +42,7 @@ router.get('/', (req, res, next) => {
             }
             })
 
-          res.render('home-feed', { listOfChildren: childList/*,listOfPosts: postList*/ });
+          res.render('home-feed', { listOfChildren: childList,listOfPosts: postList });
         })
         .catch((err) => {
           next(err)

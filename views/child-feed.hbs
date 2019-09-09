@@ -47,12 +47,14 @@
 <!-- SIDE NAV ================================== -->
 <div class="sidenav">
   <ul class="toggle-avatars">
+    {{#each listOfChildren}}
     <li>
       <a href="#child-1">
-        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
+        <img class="circle avatar" src="{{this.image}}">
       </a>
     </li>
-    <li>
+    {{/each}}
+    {{!-- <li>
       <a href="#child-21">
         <img class="circle avatar" src="/images/headshot-girl-square.jpg">
       </a>
@@ -61,7 +63,7 @@
       <a href="#child-3">
         <img class="circle avatar" src="/images/headshot-girl-square.jpg">
       </a>
-    <li>
+    <li> --}}
     <li>
       <div class="sidebar-add-child-button">
         <a class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
@@ -213,7 +215,7 @@
       </div>
     {{/each}}
 
-    <div class="col s12 m3">
+    {{!-- <div class="col s12 m3">
       <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
     </div>
 
@@ -243,7 +245,7 @@
       <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
     </div>
   </div>
-
+ --}}
 
 </div> <!-- end child feed container -->
 
