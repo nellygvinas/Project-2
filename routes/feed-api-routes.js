@@ -6,7 +6,12 @@ const Child = require('../models/Child');
 const fileUploader = require('../config/cloudinary-file');
 
 
-router.get('/api/feed/created-post', (req, res, next)=>{
+router.get('/api/feed/created-post/:id', (req, res, next)=>{
+
+    let id = req.params.id
+
+    console.log(id)
+
     Posting.findById(id)
     .then((theNewPosting)=>{
         res.json(theNewPosting)
@@ -30,7 +35,7 @@ router.post('/api/feed/new-post', fileUploader.single('postImage'), (req, res, n
   })
   .then((newPost)=>{
 
-      res.json({msg: 'json-ified!'});
+      res.json({msg: 'json-ified!', newPost});
   })  
   .catch((err)=>{
       console.log(err)

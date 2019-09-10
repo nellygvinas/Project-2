@@ -26,35 +26,36 @@ formData.append('postImage', image);
      axios.post('/api/feed/new-post', formData)
      .then((result)=>{
 
-        console.log(`result data: ----------------------------${result.data[0]}`)
+        console.log(result.data.newPost._id)
+    
+      
+        axios.get('/api/feed/created-post/'+result.data.newPost._id)
+          .then((response)=>{
+           // take the new updated info and put it on the page
+           
+           console.log(response)
+           
+           let createdPost = response.data
 
+            console.log(createdPost)
 
-      //  Possibly make another axios request to get new updated info ??
-      //   axios.get('/api/feed/created-post')
-      //     .then((response)=>{
-      //      // take the new updated info and put it on the page
-      //      let createdPost = response.data
-
-      //       console.log(createdPost)
-
-      //      let theTitle = createdPost.title
-      //      let theDate = createdPost.date
-      //      let theDescription = createdPost.description
-      //      let theId  = createdPost.childId
-      //      let theImage = createdPost.image
+           let theTitle = createdPost.title
+           let theDate = createdPost.creation
+           let theDescription = createdPost.description
+           let theImage = createdPost.image
    
-      //      console.log(theTitle, theDate, theDescription, theId)
+           console.log(theTitle, theDate, theDescription, theImage)
    
 
-      //     $("div.child-feed container > row").prepend(`<div class="col s12 m3">
-      //     <img src="${theImage}" alt="" class="responsive-img materialboxed  art-img">
-      //     </div>`)
+          $(".post-images").prepend(`<div class="col s12 m3 push-s5">
+          <img src="${theImage}" alt="" class="responsive-img materialboxed  art-img append-test">
+          </div>`)
 
       
-      //  })
-      //  .catch((err)=>{
-      //      console.log(err);
-      //   })
+       })
+       .catch((err)=>{
+           console.log(err);
+        })
       })
        .catch((err)=>{
         console.log(err);
