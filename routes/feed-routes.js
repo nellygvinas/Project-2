@@ -72,6 +72,8 @@ router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, re
     image = req.file.url;
   }
 
+  console.log(image)
+  
   Child.create({
     name: newName,
     dob: newDOB,
