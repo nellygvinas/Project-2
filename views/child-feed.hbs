@@ -145,7 +145,7 @@
           <!-- Add a new piece to Child's portfolio. -->
           <h2>Add a new piece to {{theChild.name}}'s portfolio</h2>
 
-          <form id="create-post" >
+          <form id="create-post">
 
             <input type="hidden" id="childId" value="{{theChild._id}}">
 
@@ -208,125 +208,16 @@
   <div class="row">
 
     {{#each listOfPosts}}
-      <div class="col s12 m3">
-      <img src="{{this.image}}" alt="" class="responsive-img materialboxed  art-img">
-      </div>
+    <div class="col s12 m3 pic-box">
+      <img src="{{this.image}}" alt="" class="responsive-img materialboxed  art-img" meta-caption="{{this.description}}">
+    </div>
     {{/each}}
-
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
-
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
-
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
   </div>
-
-  <div class="row">
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
-
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
-
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
-
-    <div class="col s12 m3">
-      <img src="/images/artwork-2.jpg" alt="" class="responsive-img materialboxed  art-img">
-    </div>
-  </div>
-
-
-</div> <!-- end child feed container -->
-
-
-
-{{!-- <div class="card">
-    <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="/images/Artwork1.png">
-    </div>
-    <div class="card-content">
-      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-      <p><a href="#">This is a link</a></p>
-    </div>
-    <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
-    </div>
-  </div> --}}
-
-</div>
-
-{{!-- <a href="/feed">Back to Feed</a> --}}
-
-{{!-- <h1 id="child-name">
-    {{theChild.name}}
-  </h1>
-
-  <h4 id="child-dob">
-    Date of Birth {{theChild.dob}}
-  </h4>
-
-  <img src="{{theChild.image}}" alt="">
-
-  <div class="post-container">
-    <h1>Posts</h1>
-    {{#each listOfPosts}}
-    <div class="post-section">
-      <div class="post-card">
-        <h2 id="post-title">
-          {{this.title}}
-        </h2>
-        <div class="post-container">
-          {{#each listOfPosts}}
-          <div class="post-card">
-            <h2 id="post-title">
-              {{this.title}}
-            </h2>
-            <h4 id="post-date">
-              {{this.creation}}
-            </h4>
-            <h4 id="post-date">
-              {{this.creation}}
-            </h4>
-            <p id="post-description">
-              {{this.description}}
-            </p>
-            <img id="post-image" src="{{this.image}}">
-            <p id="post-child">
-              {{this.child}}
-            </p>
-          </div>
-          {{/each}}
-        </div>
-
-        <p id="post-description">
-          {{this.description}}
-        </p>
-
-        <img id="post-image" src="{{this.image}}">
-
-        <p id="post-child">
-          {{this.child}}
-        </p>
-
-      </div>
-      {{/each}}
-    </div>
-  </div> --}}
 
 </div> <!-- END CHILD FEED -->
 
 <footer>
-  <div class="right">
+  <div class=" right">
     ©2019 all rights reserved. A project by Dusty Garon & Nelly Gonzalez-Vinas.
   </div>
 </footer>
