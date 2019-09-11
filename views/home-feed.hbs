@@ -111,7 +111,9 @@
         <h4>Add Child</h4>
         <div class="row">
 
-          <form class="col s12" action="/feed/create-child" method="POST" enctype="multipart/form-data">
+          {{!-- The first form method is used if getting through router. second form method is for posting with axios --}}
+          {{!-- <form class="col s12" action="/feed/create-child" method="POST" enctype="multipart/form-data"> --}}
+          <form class="col s12" id="create-child">
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder="Ex: Johnny" id="first_name" type="text" class="validate" name="theName">
@@ -152,43 +154,6 @@
 
 
   <div>
-
-    <!-- MOVE THIS TO THE CHILD FEED VIEW -->
-    <!-- should we call this "add artwork" instead? -->
-    {{!-- <h2>Create Post</h2>
-    <form action="" id="create-post">
-      <div>
-        <label>Select Child</label>
-        <select name="children" id="postChildId" multiple>
-          {{#each listOfChildren}}
-          {{#if this.owned}}
-          <option value="{{this._id}}">{{this.name}}</option>
-          {{/if}}
-          {{/each}}
-        </select>
-      </div>
-
-      <div>
-        <label>Title</label>
-        <input type="text" id="postTitle">
-      </div>
-      <div>
-        <label>Date Created</label>
-        <input type="date" id="postDate">
-      </div>
-      <div>
-        <label>Description</label>
-        <input type="text" id="postDescription">
-      </div>
-      <div>
-        <label>Add Image</label>
-        <input type="file" id="postImage">
-      </div>
-      <input type="submit">
-    </form>
-  </div>  --}}
-    <!-- END CREATE POST -->
-
 
 
     <div class="post-container">
@@ -259,4 +224,4 @@
 
 
 
-    {{!-- <script src="/javascripts/new-post.js"></script> --}}
+    <script src="/javascripts/new-child.js"></script>

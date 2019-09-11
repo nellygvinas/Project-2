@@ -1,16 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
 
-  document.getElementById('create-post').onsubmit = function(event){
+  document.getElementById('create-child').onsubmit = function(event){
 
     event.preventDefault();
 
-    let title = document.getElementById('postTitle').value;
-    let date = document.getElementById('postDate').value;
-    let description = document.getElementById('postDescription').value;
-    let childId = document.getElementById('childId').value;
+    let name = document.getElementById('postTitle').value;
+    let dob = document.getElementById('postDate').value;
+    let creator = document.getElementById('childId').value;
 
     let image = document.getElementById('upload-file').files[0];
+
+// child model:
+
+// const childSchema = new Schema({
+//   name: String,
+//   dob: Date,
+//   image: String,
+//   creator: {type: Schema.Types.ObjectId, ref: 'User'}, 
+//   postings: [{type: Schema.Types.ObjectId, ref: 'Posting'}]
+
+
+
 
 
 const formData = new FormData();
@@ -65,4 +76,4 @@ formData.append('postImage', image);
     
     }  // end of on-click function
 
-  }, false); // end of document event listener
+  }, false);

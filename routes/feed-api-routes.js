@@ -6,41 +6,21 @@ const Child = require('../models/Child');
 const fileUploader = require('../config/cloudinary-file');
 
 
-// router.get('/feed/:childId', (req, res, next)=>{
+router.get('/api/feed/created-post/:id', (req, res, next)=>{
 
-//     const childId = req.params.childId 
-//     const filter = { child: childId }
-//     console.log(req.params.childId)
+    let id = req.params.id
 
-//     Child.findById(childId)
-//     .then((child)=>{
+    console.log(id)
 
-//         Posting.find(filter)
-//         .then((posts) => {
+    Posting.findById(id)
+    .then((theNewPosting)=>{
+        res.json(theNewPosting)
+    })
+    .catch((err)=>{
+        next(err);
+    })
+})
 
-//         let postList = posts.map((eachPost)=>{
-//         if(eachPost.creator.equals(req.user._id)){
-//             eachPost.owned = true;
-//             return eachPost
-//         } else {
-//             console.log("No postings found for this user.")
-//         }
-//         })
-        
-//         res.render('child-feed', {theChild: child, listOfPosts: postList});
-//     })
-//     .catch((err)=>{
-//         next(err)
-//     })
-//     })
-//     .catch((err)=>{
-//     next(err)
-//     })
-
-//     })
-
-
-// 
 
 router.post('/api/feed/new-post', fileUploader.single('postImage'), (req, res, next)=>{
   
@@ -55,7 +35,7 @@ router.post('/api/feed/new-post', fileUploader.single('postImage'), (req, res, n
   })
   .then((newPost)=>{
 
-      res.json({msg: 'json-ified!'});
+      res.json({msg: 'json-ified!', newPost});
   })  
   .catch((err)=>{
       console.log(err)
