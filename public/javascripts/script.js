@@ -25,7 +25,9 @@ $(document).ready(function () {
   $('.modal').modal()
 
 
-  // magnific popup
+  // ------------------
+  // MAGNIFIC
+  // ------------------
   $('.test-popup-link').magnificPopup({
     type: 'image',
     gallery: { enabled: true },
@@ -34,7 +36,7 @@ $(document).ready(function () {
       titleSrc: 'title'
       // this tells the script which attribute has your caption
     }
-  })
+  });
 
   // This will create a single gallery from all elements that have class "gallery-item"
   $('.gallery-item').magnificPopup({
@@ -42,5 +44,5 @@ $(document).ready(function () {
     gallery: {
       enabled: true,
     },
-  })
+  });
 
