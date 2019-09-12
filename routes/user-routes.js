@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const User    = require('../models/User');
+const Child = require('../models/Child');
 const bcrypt = require('bcryptjs');
 const passport = require("passport");
 
@@ -93,17 +94,40 @@ router.get('/feed/logout', (req, res, next)=>{
 
 router.get('/feed/user-details', (req, res, next)=>{
   const userId = req.user._id;
+  console.log("User ID is:"+userId)
   
   User.findById(userId)
   .then((userInfo)=>{
+    
+    console.log(userInfo)
     let userArr = userInfo.data
     console.log(userArr);
-    res.render('user-details', {theUser: userInfo})
-  })
-  .catch((err)=>{
+    
+    Child.find()
+    .then((children) => {
+      
+      let childList = children.map((eachChild) => {
+        if (eachChild.creator.equals(req.user._id)) {
+          eachChild.owned = true;
+          return eachChild
+        } else {
+          console.log("No children found for this user.")
+        }
+      })
+  
+      let chronologicalChildList = childList.reverse()
+
+      res.render('user-details', {theUser: userInfo, listOfChildren: childList})
+    
+      })
+      .catch((err) => {
+        next(err)
+      })
+    }) // end of User find .then
+    .catch((err)=>{
     next(err)
   })
-  })
+}) // end of router.get
 
 
 

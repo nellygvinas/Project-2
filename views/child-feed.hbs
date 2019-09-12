@@ -47,13 +47,17 @@
 <!-- SIDE NAV ================================== -->
 <div class="sidenav">
   <ul class="toggle-avatars">
+
     {{#each listOfChildren}}
+    {{#if this.owned}}
     <li>
-      <a href="#child-1">
+      <a href="/feed/{{this._id}}">
         <img class="circle avatar" src="{{this.image}}">
       </a>
     </li>
+    {{/if}}
     {{/each}}
+
 
     <li>
       <div class="sidebar-add-child-button">

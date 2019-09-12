@@ -50,7 +50,7 @@
     {{#each listOfChildren}}
     {{#if this.owned}}
     <li>
-      <a href="#child-1">
+      <a href="/feed/{{this._id}}">
         <img class="circle avatar" src="{{this.image}}">
       </a>
     </li>
@@ -85,6 +85,7 @@
             </span>
             <a href="#">Edit</a>
           </div>
+            <a href="/feed/details/{{this._id}}">Edit</a>
         </div>
       </a>
     </div>
@@ -123,7 +124,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <label for="birthdate">Child's Birthdate</label>
-                <input type="text" class="datepicker" class="validate" name="theDateOfBirth" id="childDob">
+                <input type="date" class="datepicker" class="validate" name="theDateOfBirth" id="childDob">
               </div>
             </div>
             <div class="row">
