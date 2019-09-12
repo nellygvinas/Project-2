@@ -2,6 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const Posting = require('../models/Posting');
 const Child = require('../models/Child');
+const User = require('../models/User');
 
 const fileUploader = require('../config/cloudinary-file');
 

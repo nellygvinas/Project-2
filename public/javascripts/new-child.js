@@ -42,6 +42,7 @@ formData.append('creatorId', creator);
            
            let createdChild = response.data
 
+
            let theName = createdChild.name
            let theDob = createdChild.dob
            let theImage = createdChild.image
