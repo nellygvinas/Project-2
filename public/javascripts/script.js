@@ -2,7 +2,19 @@
 // ------------------
 // DATEPICKER
 // ------------------
-$('.datepicker').pickadate({})
+$('.datepicker').pickadate({
+  // labelMonthNext: 'Go to the next month',
+  // labelMonthPrev: 'Go to the previous month',
+  labelMonthSelect: 'Pick a month from the dropdown',
+  labelYearSelect: 'Pick a year from the dropdown',
+  selectMonths: true,
+  selectYears: 30,
+  selectYear: 'picker__select--year',
+  //formatSubmit: 'yyyy/mm/dd',
+  hiddenName: true,
+  min: undefined,
+  max: true
+})
 // fix for auto close bug in chrome
 $('.datepicker').on('mousedown', function (event) { event.preventDefault() })
 
@@ -11,9 +23,9 @@ $('.datepicker').on('mousedown', function (event) { event.preventDefault() })
 // ------------------
 $(document).ready(function () {
   $('.modal').modal()
-})
 
 
+<<<<<<< HEAD
 // magnific popup
 $('.test-popup-link').magnificPopup({
   type: 'image',
@@ -34,3 +46,7 @@ $('.gallery-item').magnificPopup({
 });
 
 
+=======
+
+})
+>>>>>>> feba26948a7e5b5dea8604ac58ab24137b7010f3
