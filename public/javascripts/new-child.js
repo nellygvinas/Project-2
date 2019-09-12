@@ -5,11 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     event.preventDefault();
 
-    let name = document.getElementById('postTitle').value;
-    let dob = document.getElementById('postDate').value;
-    let creator = document.getElementById('childId').value;
-
-    let image = document.getElementById('upload-file').files[0];
+    let name = document.getElementById('childName').value;
+    let dob = document.getElementById('childDob').value;
+    let image = document.getElementById('newChildImage').files[0];
+    let creator = document.getElementById('creatorId').value;
 
 // child model:
 
@@ -21,46 +20,46 @@ document.addEventListener('DOMContentLoaded', () => {
 //   postings: [{type: Schema.Types.ObjectId, ref: 'Posting'}]
 
 
-
-
-
 const formData = new FormData();
 
-formData.append('postTitle', title);
-formData.append('postDate', date);
-formData.append('postDescription', description);
-formData.append('postChildId', childId);
-formData.append('postImage', image);
+formData.append('childName', name);
+formData.append('childDob', dob);
+formData.append('newChildImage', image);
+formData.append('creatorId', creator);
 
 
 // make axios request and send the correct stuff in req.body
-     axios.post('/api/feed/new-post', formData)
+     axios.post('/api/feed/new-child', formData)
      .then((result)=>{
 
-        console.log(result.data.newPost._id)
-    
+        console.log(result.data.newChild._id)
+        let childId = result.data.newChild._id
+        console.log(`The CHILD ID IS:`+result.data.newChild._id)
       
-        axios.get('/api/feed/created-post/'+result.data.newPost._id)
+        axios.get('/api/feed/created-child/'+childId)
           .then((response)=>{
            // take the new updated info and put it on the page
            
-           console.log(response)
-           
-           let createdPost = response.data
+           let createdChild = response.data
 
-            console.log(createdPost)
-
-           let theTitle = createdPost.title
-           let theDate = createdPost.creation
-           let theDescription = createdPost.description
-           let theImage = createdPost.image
+           let theName = createdChild.name
+           let theDob = createdChild.dob
+           let theImage = createdChild.image
+           let theNewChildId = createdChild._id
    
-           console.log(theTitle, theDate, theDescription, theImage)
+           console.log(theName, theDob, theImage)
    
 
-          $(".post-images").prepend(`<div class="col s12 m3 push-s5">
-          <img src="${theImage}" alt="" class="responsive-img materialboxed  art-img append-test">
-          </div>`)
+          $("#child-list").prepend(`<div class="col s12 m2"><a href="/feed/${theNewChildId}">
+          <div class="card">
+            <div class="card-image">
+              <img src="${theImage}">
+              <span class="card-title">
+                ${theName}
+              </span>
+            </div>
+          </div>
+        </a></div>`)
 
       
        })

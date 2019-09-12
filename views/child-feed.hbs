@@ -54,16 +54,7 @@
       </a>
     </li>
     {{/each}}
-    {{!-- <li>
-      <a href="#child-21">
-        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
-      </a>
-    <li>
-    <li>
-      <a href="#child-3">
-        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
-      </a>
-    <li> --}}
+
     <li>
       <div class="sidebar-add-child-button">
         <a class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
@@ -205,22 +196,41 @@
 
 
 <!-- GALLERY IMAGES GRID-->
+
 <div class="child-feed container">
 
   <div class="row post-images">
-
     {{#each listOfPosts}}
-    <div class="col s12 m3 push-s5">
-      <img src="{{this.image}}" alt="" class="responsive-img materialboxed  art-img append-test">
+    <div class="col s12 m4">
+      <div class="image-wrapper">
+        {{!-- the pop up image --}}
+        <a class="test-popup-link" href="{{this.image}}" title="Title: {{this.title}}, Age at Creation: {{this.creation}}, Description: {{this.description}}">
+          {{!-- the gallery square image --}}
+          <img src="{{this.image}}" alt="{{this.description}}" class="gallery-item" title="this is an inside title">
+        </a>
+      </div>
     </div>
     {{/each}}
+  </div>
 
 
-  </div> <!-- end child feed container -->
+  <!-- 
+  <div class="row post-images">
+    {{#each listOfPosts}}
+    <div class="col s12 m3 push-s5">
+      <div class="image-wrapper">
+        <img src="{{this.image}}" alt="" class="responsive-img materialboxed  art-img append-test">
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  -->
+
+</div> <!-- end child feed container -->
 
 
 
-  {{!-- <div class="card">
+{{!-- <div class="card">
     <div class="card-image waves-effect waves-block waves-light">
       <img class="activator" src="/images/Artwork1.png">
     </div>
