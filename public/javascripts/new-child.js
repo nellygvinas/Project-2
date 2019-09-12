@@ -51,16 +51,21 @@ formData.append('creatorId', creator);
    
 
           $("#child-list").prepend(`<div class="col s12 m2"><a href="/feed/${theNewChildId}">
-          <div class="card">
+           <div class="card">
             <div class="card-image">
               <img src="${theImage}">
               <span class="card-title">
                 ${theName}
               </span>
+             </div>
             </div>
-          </div>
-        </a></div>`)
+           </a></div>`)
 
+          $(".toggle-avatars").prepend(`<li>
+          <a href="/feed/details/"+${theNewChildId}>
+            <img class="circle avatar" src="${theImage}">
+          </a>
+        </li>`)
       
        })
        .catch((err)=>{

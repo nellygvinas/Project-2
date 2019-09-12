@@ -50,7 +50,7 @@
     {{#each listOfChildren}}
     {{#if this.owned}}
     <li>
-      <a href="#child-1">
+      <a href="/feed/{{this._id}}">
         <img class="circle avatar" src="{{this.image}}">
       </a>
     </li>
@@ -84,6 +84,7 @@
               {{this.name}}
             </span>
           </div>
+            <a href="/feed/details/{{this._id}}">Edit</a>
         </div>
       </a>
     </div>

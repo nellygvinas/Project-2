@@ -41,8 +41,11 @@ router.get('/', (req, res, next) => {
             console.log("No postings found for this user.")
             }
             })
+          
+          let chronologicalPosts = postList.reverse()
 
           res.render('home-feed', { listOfChildren: childList,listOfPosts: postList });
+            console.log("POSTS BY ORDER:"+chronologicalPosts)
         })
         .catch((err) => {
           next(err)
@@ -112,6 +115,7 @@ router.get('/:childId', (req, res, next) => {
           }
           })
 
+          let chronologicalPosts = postList.reverse()
           //console.log(postList)
           res.render('child-feed', { theChild: child, listOfPosts: postList});
         })
