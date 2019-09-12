@@ -55,43 +55,6 @@ router.get('/', (req, res, next) => {
 }) // end of get request for home feed.
 
 
-// CREATE CHILD  =================================
-
-router.get('/new-child', (req, res, next) => {
-  res.render('create-child')
-  //res render the view for the new child page when the get request for the page is received.
-})
-
-
-router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, res, next) => {
-  let newName = req.body.theName;
-  let newDOB = req.body.theDateOfBirth;
-  let image = '/images/no-avatar.jpg';
-
-  if (req.file) {
-    image = req.file.url;
-  }
-
-  console.log(image)
-  
-  Child.create({
-    name: newName,
-    dob: newDOB,
-    image: image,
-    creator: req.user._id
-  })
-    .then(() => {
-
-      req.flash('success', 'New Child successfully added')
-
-      res.redirect('/feed')
-      //res redirect take a url as the argument
-    })
-    .catch((err) => {
-      next(err)
-    })
-})
-
 // GET CHILD DETAILS =================================
 
 router.get('/details/:idVariable', (req, res, next) => {
@@ -215,6 +178,37 @@ router.post('/:childId/new-post', fileUploadMiddleWare.single('artImage'), (req,
 }) // end of router.post
 
  
+
+// PREVIOUS METHOD TO CREATE CHILD (WITHOUT AXIOS):
+
+// router.post('/create-child', fileUploadMiddleWare.single('childImage'), (req, res, next) => {
+//   let newName = req.body.theName;
+//   let newDOB = req.body.theDateOfBirth;
+//   let image = '/images/no-avatar.jpg';
+
+//   if (req.file) {
+//     image = req.file.url;
+//   }
+
+//   console.log(image)
+  
+//   Child.create({
+//     name: newName,
+//     dob: newDOB,
+//     image: image,
+//     creator: req.user._id
+//   })
+//     .then(() => {
+
+//       req.flash('success', 'New Child successfully added')
+
+//       res.redirect('/feed')
+//       //res redirect take a url as the argument
+//     })
+//     .catch((err) => {
+//       next(err)
+//     })
+// })
 
 
 

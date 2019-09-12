@@ -46,21 +46,17 @@
 <!-- SIDE NAV ================================== -->
 <div class="sidenav">
   <ul class="toggle-avatars">
+
+    {{#each listOfChildren}}
+    {{#if this.owned}}
     <li>
       <a href="#child-1">
-        <img class="circle avatar" src="images/headshot-girl-square.jpg">
+        <img class="circle avatar" src="{{this.image}}">
       </a>
     </li>
-    <li>
-      <a href="#child-21">
-        <img class="circle avatar" src="images/headshot-girl-square.jpg">
-      </a>
-    <li>
-    <li>
-      <a href="#child-3">
-        <img class="circle avatar" src="images/headshot-girl-square.jpg">
-      </a>
-    <li>
+    {{/if}}
+    {{/each}}
+
     <li>
       <div class="sidebar-add-child-button">
         <a class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
@@ -74,7 +70,7 @@
 <div class="container">
   <h2>Children</h2>
 
-  <div class="row  children-row">
+  <div class="row  children-row" id="child-list">
 
     {{#each listOfChildren}}
     {{#if this.owned}}
@@ -87,10 +83,10 @@
             <span class="card-title">
               {{this.name}}
             </span>
+            <a href="#">Edit</a>
           </div>
         </div>
       </a>
-
     </div>
     {{/if}}
     {{/each}}
@@ -104,6 +100,7 @@
         </div>
       </div>
     </div>
+    <!--end of child row-->
 
     <!-- CREATE CHILD MODAL -->
     <div id="modal1" class="modal">
@@ -114,23 +111,26 @@
           {{!-- The first form method is used if getting through router. second form method is for posting with axios --}}
           {{!-- <form class="col s12" action="/feed/create-child" method="POST" enctype="multipart/form-data"> --}}
           <form class="col s12" id="create-child">
+
+            <input type="hidden" id="creatorId" value="{{theUser._id}}">
+
             <div class="row">
               <div class="input-field col s12">
-                <input placeholder="Ex: Johnny" id="first_name" type="text" class="validate" name="theName">
-                <label for="first_name">Child's Name</label>
+                <input placeholder="Ex: Johnny" id="childName" type="text" class="validate" name="theName">
+                <label for="child_name">Child's Name</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <label for="birthdate">Child's Birthdate</label>
-                <input type="text" class="datepicker" class="validate" name="theDateOfBirth">
+                <input type="text" class="datepicker" class="validate" name="theDateOfBirth" id="childDob">
               </div>
             </div>
             <div class="row">
               <div class="file-field input-field col s12">
                 <div class="btn waves-effect">
                   <span>File</span>
-                  <input type="file">
+                  <input type="file" id="newChildImage">
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text" placeholder="Upload an image of your child">
