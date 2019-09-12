@@ -47,23 +47,17 @@
 <!-- SIDE NAV ================================== -->
 <div class="sidenav">
   <ul class="toggle-avatars">
+    
     {{#each listOfChildren}}
+    {{#if this.owned}}
     <li>
-      <a href="#child-1">
+      <a href="/feed/{{this._id}}">
         <img class="circle avatar" src="{{this.image}}">
       </a>
     </li>
+    {{/if}}
     {{/each}}
-    {{!-- <li>
-      <a href="#child-21">
-        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
-      </a>
-    <li>
-    <li>
-      <a href="#child-3">
-        <img class="circle avatar" src="/images/headshot-girl-square.jpg">
-      </a>
-    <li> --}}
+    
     <li>
       <div class="sidebar-add-child-button">
         <a class="btn-floating btn-large waves-effect waves-light modal-trigger" href="#modal1"><i class="material-icons">add</i></a>

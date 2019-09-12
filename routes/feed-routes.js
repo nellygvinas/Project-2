@@ -43,14 +43,15 @@ router.get('/', (req, res, next) => {
             })
           
           let chronologicalPosts = postList.reverse()
+          let chronologicalChildList = childList.reverse()
 
           res.render('home-feed', { listOfChildren: childList,listOfPosts: postList });
-            console.log("POSTS BY ORDER:"+chronologicalPosts)
+          //console.log("POSTS BY ORDER:"+chronologicalPosts)
         })
         .catch((err) => {
           next(err)
         })
-    })
+    }) // end of Child find .then
     .catch((err) => {
       next(err)
     })
@@ -100,6 +101,9 @@ router.get('/:childId', (req, res, next) => {
   //console.log(`USER ID: ${req.user._id} ================`)
   //console.log(`CHILD ID: ${req.params.childId} ================`)
 
+Child.find()
+.then((children) => {
+
   Child.findById(childId)
     .then((child) => {
 
@@ -115,9 +119,19 @@ router.get('/:childId', (req, res, next) => {
           }
           })
 
+          let childList = children.map((eachChild) => {
+            if (eachChild.creator.equals(req.user._id)) {
+              eachChild.owned = true;
+              return eachChild
+            } else {
+              console.log("No children found for this user.")
+            }
+          })
+
           let chronologicalPosts = postList.reverse()
+          let chronologicalChildList = childList.reverse()
           //console.log(postList)
-          res.render('child-feed', { theChild: child, listOfPosts: postList});
+          res.render('child-feed', { listOfChildren: childList, theChild: child, listOfPosts: postList});
         })
         .catch((err) => {
           next(err)
@@ -126,8 +140,13 @@ router.get('/:childId', (req, res, next) => {
     .catch((err) => {
       next(err)
     })
+  .catch((err) => {
+    next(err)
+  })
+}) // end of find all children
 
-})
+}) //end of router.get
+
 
 
 // CREATE POST ====================================================

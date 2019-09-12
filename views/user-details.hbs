@@ -58,7 +58,23 @@
 
 <h4 id="user-children">
 <label for="">Children:</label>
-{{#each listOfChildren}}
+
+  <ul class="toggle-avatars">
+    
+    {{#each listOfChildren}}
+    {{#if this.owned}}
+    <li>
+      <a href="/feed/details/{{this._id}}">
+        <img class="circle avatar" src="{{this.image}}">
+      </a>
+    </li>
+    {{/if}}
+    {{/each}}
+
+  </ul>
+
+
+{{!-- {{#each listOfChildren}}
 
       <a href="/feed/{{this._id}}">
       <h3>{{this.image}}
@@ -72,7 +88,7 @@
   {{else}}
   {{/if}}
 
-{{/each}}
+{{/each}} --}}
 
 <div>
   <form action="/feed/user-details/{{theUser._id}}/remove" method="POST">
